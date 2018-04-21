@@ -1,0 +1,3 @@
+model training
+split pos
+neg  1:k
