@@ -5,55 +5,28 @@ you look smart
 I am going to sleep
 Thank you very much
 have you eat breakfast?
-good 
 good
-hehe
-I need to learn English today
-thank you
-you are a smart guy
-Thank you
-how old are you?
-you are nice
-that's ok
-you are a gril?
-you are a boy?
-I am really happy for you
-I am bit of frustrated today
-good bye
-can you hear me?
-can you speak?
-you like film?
-that's great, isn't it?
-can you write codes?
-you can go on the web to learn
-maybe you can recommend a girlfriend to me?
-Am I handsome?
-what's the time now?
-where are you?
-Can you tell me your name?
-ok,nice to meet you
-oh,a good sleep
-do you know Tofel test?
-Tofel test is a test needed for going abroad
-interesting enough
-goodbye
-well,I feel bit boring
-thanks
-I am reall interested in coding work
-I am really interested in coding
-I'm back
-you are beautiful
-you are smart
-good evening
-I get up late
-i don't know, maybe....
-I am going to updata you
-
-I am going to the lab
-it's hot here, you may turn the air condition on
+dic:hello
 good afternoon
-I would like to have a sleep
-go and grap something to eat?
-what's the time?
+thanks
 good night
-let's go for a dinner?
+thank you
+you are such a kind girl
+nice to meet you
+good evening
+oh,I will test you
+you are beautiful
+how to teach you?
+I type in something wrong
+
+I type in something right
+go and have breakfast?
+where if the file?
+hehe
+haha
+you are nice
+you are welcome
+ok
+that's nice
+you are ncie
+good luck with me!

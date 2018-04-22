@@ -1,5 +1,5 @@
-get the words' anatomies
-collect the html data and tags
-null
-null
-null
+data with somebody
+have lunch
+go swimming
+do homework
+sing

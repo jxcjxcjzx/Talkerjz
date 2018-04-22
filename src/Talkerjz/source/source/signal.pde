@@ -48,6 +48,8 @@ class signal
   String forjudge ="";
   boolean centerused = false;
   boolean centerstate = false;
+  Minim minim;
+  AudioPlayer groove;
   
   void reset()
   {

@@ -4,6 +4,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.util.regex.*;
+import ddf.minim.*;
 answer answerit = new answer();
 lister abc = new lister();
 signal sig = new signal();
@@ -21,6 +22,7 @@ Writingpass pass120 = new Writingpass();
 Passin loginhere = new Passin();
 syscenter centerone = new syscenter();
 usrcenter centertwo = new usrcenter();
+timerecor timeone = new timerecor();
 
 
   void setup()
@@ -38,11 +40,20 @@ usrcenter centertwo = new usrcenter();
     sig.sys_vectorjudge();
     centerone.handle_in_setup();
     centertwo.handle_in_setup();
+    
+    // initial work for time management
+    sig.minim = new Minim(this);
+    sig.groove = sig.minim.loadFile("sunset.mp3", 1024);
+    Timer timer = new Timer();
+    timer.schedule(new MyTask(),45*60*1000,60*60*1000);
   }
   
   void draw()
   { 
-  
+    //  time management part
+    /*
+    timeone.handle_in_draw();
+    */
    // the head of code
     if(!loginhere.login||!loginhere.alter){
     loginhere.handle_in_draw();
@@ -107,7 +118,7 @@ usrcenter centertwo = new usrcenter();
      sig.m_mousepressed = false;
      sig.m_mousereleased = false;
      sig.m_mousedragged = false;
-  }
+}
   
   
   
@@ -132,3 +143,16 @@ usrcenter centertwo = new usrcenter();
     sig.m_mousedragged = true;
   }
 
+
+
+
+
+
+class MyTask extends java.util.TimerTask{
+public void run() {
+// TODO Auto-generated method stub
+  sig.minim.stop();
+  sig.groove = sig.minim.loadFile("sunset.mp3", 1024);
+  sig.groove.play();
+}
+}
