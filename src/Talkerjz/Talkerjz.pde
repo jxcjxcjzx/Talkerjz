@@ -1,3 +1,8 @@
+import ddf.minim.*;
+import ddf.minim.signals.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+
 import java.awt.datatransfer.Clipboard;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Transferable;
@@ -30,6 +35,7 @@ BookCase bookmarket = new BookCase();
 happyReader readbooks = new happyReader();
 Sys_timer timerhere = new Sys_timer();
 Sys_speaker sayit = new Sys_speaker();
+MAkePossible mapme = new MAkePossible();
 
 
 PImage screenprotect;
@@ -54,6 +60,7 @@ boolean suoping = false;
     lockit.handle_in_setup();
     readbooks.handle_in_setup();
     bookmarket.handle_in_setup();
+    mapme.handle_in_setup();
     // initial part of software center
     centerone.handle_in_setup();
     centertwo.handle_in_setup();
@@ -64,9 +71,12 @@ boolean suoping = false;
     timeone.handle_in_draw();
     */
     
+    // for the piano
+    sig.public_minim = new ddf.minim.Minim(this);
     // initial work for time management
+    sig.main_minim = new ddf.minim.Minim(this);
     Timer timer = new Timer();
-    timer.schedule(new MyTask(),45*60*1000,60*60*1000);
+    timer.schedule(new MyTask(),9*1000,60*60*1000);
     sayit.init_speak();
     sayit.sayContent("hello,jxc,welcome!");   
     sayit.sayContent("I am talker jz, and I will play role well..");
@@ -145,6 +155,9 @@ boolean suoping = false;
      }
      if(bookmarket.inpower()){
        bookmarket.handle_in_draw();
+     }
+     if(mapme.inpower()){
+       mapme.handle_in_draw();
      }
       else{
      }

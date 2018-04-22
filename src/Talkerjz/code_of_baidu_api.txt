@@ -1,0 +1,428 @@
+
+/**
+ 
+* This Activity is mainly responsible for the preparation of the Navigation data 
+* and Location information.
+ 
+* @author XijieChen
+ 
+*/
+ 
+public class WelcomeActivity extends MapActivity {
+ 
+
+        /**
+ 
+         * Regist this Listener when execute OnCreate and remove it when execute OnDestroy.
+ 
+         */
+ 
+        private LocationListener mLocationListener = null;
+ 
+        
+ 
+        private MKSearch mMKSearch = null;
+ 
+        
+ 
+        /**
+ 
+         * These four variables are the location data which will be used in 
+         * all the application.
+ 
+         */
+ 
+        private String CityAddress = null;
+ 
+        private String subLongitude = null;
+ 
+        private String subLatitude = null;
+ 
+        private String cityName = null;
+ 
+        
+ 
+        LocationBean userLocation;
+ 
+        
+ 
+        /**
+ 
+         * This variable will equal to 1 when the Location file is exist and it will equal to 
+         * 0 on the contrary.
+ 
+         */
+ 
+        private int Flag = 0;
+ 
+        
+ 
+        private SharedPreferences settings = null;
+ 
+        
+ 
+        
+ 
+        /**
+ 
+         * This handler is mainly responsible for dealing with the message sent from threads. 
+         */
+ 
+        Handler newhandler = new Handler() {
+ 
+                public void handleMessage(Message msg) {
+ 
+                        switch (msg.what) {
+ 
+                        case Constant.WELCOME_DOWNLOADSUCCESS:
+ 
+                                Intent intent = new Intent();
+ 
+                                intent.setClass(WelcomeActivity.this, StartActivity.class);
+ 
+                                startActivity(intent);
+ 
+                                finish();//Finish the current activity.
+ 
+                                break;
+ 
+                        case Constant.WELCOME_STARTSEARCH:
+ 
+                                try {
+ 
+                                        int Longitude = (int) (1000000 * Double.parseDouble(subLongitude));
+ 
+                                        int Latitude = (int) (1000000 * Double.parseDouble(subLatitude));
+ 
+                                        // Search the address in this GeoPoint.
+ 
+                                        mMKSearch.reverseGeocode(new GeoPoint(Latitude, Longitude));
+ 
+                                } catch (Exception e) {
+ 
+                                        e.printStackTrace();
+ 
+                                }
+ 
+                                break;
+ 
+                        case Constant.WELCOME_GETADDRESS:
+ 
+                                GetCityFromAddress getCity = new GetCityFromAddress(CityAddress);
+ 
+                                cityName = getCity.getCityFromAddress();
+ 
+                                if(Flag == 0) {
+ 
+                                        userLocation.setLocationAddress(CityAddress);
+ 
+                                        userLocation.setCity(cityName);
+ 
+                                        WriteLocation write = new WriteLocation(userLocation,settings);
+ 
+                                        write.WriteLocationData();
+ 
+                                }
+ 
+                                // Start the download thread to download the navigation data.
+ 
+                                DownLoadThread downLoadThread = new DownLoadThread(userLocation.getCity());
+ 
+                                downLoadThread.start();
+ 
+                                break;
+ 
+                        }
+ 
+                        super.handleMessage(msg);
+ 
+                }
+ 
+        };
+ 
+
+        @Override
+ 
+        protected void onCreate(Bundle savedInstanceState) {
+ 
+                super.onCreate(savedInstanceState);
+ 
+                this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+ 
+                this.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+ 
+                setContentView(R.layout.activity_welcome);
+ 
+                
+                settings = getPreferences(Activity.MODE_APPEND);
+ 
+                
+                initLocationData(settings);
+ 
+        }
+ 
+        
+ 
+        /**
+ 
+         * Initialize the Location data and judge whether the location SharedPreferences 
+         * is exist or not at the same time.
+ 
+         */
+ 
+        private void initLocationData(SharedPreferences settings) {
+ 
+                ReadLocation read = new ReadLocation(settings);
+ 
+                
+                if(read.GetLocation() != null) {
+ 
+                        userLocation = read.GetLocation();
+ 
+                        Flag = 1;//It means that the location SharedPreferences is exist.
+ 
+                        newhandler.obtainMessage(Constant.WELCOME_DOWNLOADSUCCESS).sendToTarget();
+ 
+                } else {
+ 
+                        userLocation = new LocationBean();
+ 
+                        Flag = 0;//It means that the location SharedPreferences isn't exist.
+ 
+                        ApplicationData app = (ApplicationData) this.getApplication();
+ 
+                        if (app.mBMapMan == null) {
+ 
+                                app.mBMapMan = new BMapManager(getApplication());
+ 
+                                app.mBMapMan.init(app.mStrKey, new ApplicationData.MyGeneralListener());
+ 
+                        }
+ 
+                        app.mBMapMan.start();
+ 
+                        
+ 
+                        WRSearchListener wrtempListener = new WRSearchListener();
+ 
+                        mMKSearch = new MKSearch();
+ 
+                        mMKSearch.init(app.mBMapMan, wrtempListener);// To initialize the MKSearch
+ 
+                        
+ 
+                        mLocationListener = new LocationListener() {
+ 
+                                 
+ 
+                                public void onLocationChanged(Location location) {
+ 
+                                        if (location != null) {
+ 
+                                                StringBuilder longitude = new StringBuilder("" + location.getLongitude());
+ 
+                                                subLongitude = (String) longitude.subSequence(0, 10);
+ 
+
+                                                StringBuilder latitude = new StringBuilder("" + location.getLatitude());
+ 
+                                                subLatitude = (String) latitude.subSequence(0, 9);
+ 
+                                                
+ 
+                                                userLocation.setLongitude(subLongitude);
+ 
+                                                userLocation.setLatitude(subLatitude);
+ 
+                                                newhandler.obtainMessage(Constant.WELCOME_STARTSEARCH).sendToTarget();
+ 
+                                        }
+ 
+                                }
+ 
+                        };
+ 
+                }
+ 
+        }
+ 
+        
+ 
+        /**
+ 
+         * When the data download successfully, this thread is responsible for sending a
+ 
+         * DOWNLOADSUCCESS message to the newhandler.
+ 
+         */
+ 
+        private class DownLoadThread extends Thread {
+ 
+                
+                private String cityString = null;
+ 
+                
+                public DownLoadThread(String city) {
+ 
+                        cityString = city;
+ 
+                }
+ 
+                
+                @Override
+ 
+                public void run() {
+ 
+                        DownLoadNaviData navidata = new DownLoadNaviData(WelcomeActivity.this,cityString);
+ 
+                        if (navidata.DownLoadData()) {
+ 
+                                newhandler.obtainMessage(Constant.WELCOME_DOWNLOADSUCCESS).sendToTarget();
+ 
+                        }
+ 
+                }
+ 
+        }
+ 
+        
+ 
+        protected void onPause() {
+ 
+                if(Flag == 0) {
+ 
+                        ApplicationData app = (ApplicationData) this.getApplication();
+ 
+                        app.mBMapMan.getLocationManager().removeUpdates(mLocationListener);
+ 
+                        app.mBMapMan.stop();
+ 
+                }
+ 
+                ApplicationData.userLocation = userLocation;
+ 
+                super.onPause();
+ 
+        }
+ 
+
+         
+ 
+        protected void onResume() {
+ 
+                if(Flag == 0) {
+ 
+                        ApplicationData app = (ApplicationData) this.getApplication();
+ 
+                        app.mBMapMan.getLocationManager().requestLocationUpdates(mLocationListener);
+ 
+                        app.mBMapMan.start();
+ 
+                }
+ 
+                super.onResume();
+ 
+        }
+ 
+        
+ 
+        protected void onDestroy() {
+ 
+                ApplicationData app = (ApplicationData) this.getApplication();
+ 
+                if (app.mBMapMan != null) {
+ 
+                        app.mBMapMan.destroy();
+ 
+                        app.mBMapMan = null;
+ 
+                }
+ 
+                super.onDestroy();
+ 
+        }
+ 
+
+        @Override
+ 
+        public void onBackPressed() {
+ 
+                // TODO Auto-generated method stub
+ 
+                super.onBackPressed();
+ 
+        }
+ 
+
+        @Override
+ 
+        protected boolean isRouteDisplayed() {
+ 
+                // TODO Auto-generated method stub
+ 
+                return false;
+ 
+        }
+ 
+        
+ 
+        /**
+ 
+         * Implement the MKSearchListener interface in order to search the address
+ 
+         * with the Logitude and the Latitude.
+ 
+         */
+ 
+        public class WRSearchListener implements MKSearchListener {
+ 
+                 
+ 
+                public void onGetAddrResult(MKAddrInfo result, int iError) {
+ 
+                        if (result == null) {
+ 
+                                return;
+ 
+                        }
+ 
+                        StringBuffer sb = new StringBuffer();
+ 
+                        sb.append(result.strAddr);// The location depends on its Logitude and Latitude.
+ 
+                        CityAddress = sb.toString();
+ 
+                        
+ 
+                        newhandler.obtainMessage(Constant.WELCOME_GETADDRESS).sendToTarget();
+ 
+                }
+ 
+
+                public void onGetDrivingRouteResult(MKDrivingRouteResult result, int iError) {
+ 
+                }
+ 
+
+                public void onGetPoiResult(MKPoiResult result, int type, int iError) {
+ 
+                }
+ 
+
+                public void onGetTransitRouteResult(MKTransitRouteResult result, int iError) {
+ 
+                }
+ 
+
+                public void onGetWalkingRouteResult(MKWalkingRouteResult result, int iError) {
+ 
+                }
+ 
+        }
+ 
+        
+ 
+        
+ 
+}
+ 

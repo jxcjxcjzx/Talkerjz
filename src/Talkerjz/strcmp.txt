@@ -1,0 +1,142 @@
+　void string::strempty()
+　　{
+　　int istrlen(line);
+　　if(i0)
+　　{
+　　cout<<"The string is empty !";
+　　}
+　　else
+　　{
+　　cout<<"The string is not empty !";
+　　}
+　　}
+　　string string::operator (string s1)
+　　{
+　　strcpy(line,s1.line);
+　　return *this;
+　　}
+　　string string::operator + (string s1)
+　　{
+　　strcat(line,s1.line);
+　　return *this;
+　　}
+　　void string::operator < (string s1)
+　　{
+　　int lstrlen(s1.line);
+　　int mstrlen(line);
+　　if(m<l)
+　　{
+　　cout<<"less and equal";
+　　}
+　　else
+　　{
+　　cout<<"not less and equal";
+　　}
+　　}
+　　void string::operator ! (string s1)
+　　{
+　　char n1[100];
+　　strcpy(n1,s1.line);
+　　int l;
+　　lstrlen(line);
+　　int m;
+　　mstrlen(n1);
+　　if(l!m)
+　　cout<<"judge not equal correct";
+　　else
+　　{
+　　for(int i0;i<l;i++)
+　　{
+　　if(line[i]n1[i])
+　　{
+　　if(il-1)
+　　cout<<"judge not equal error";
+　　}
+　　else
+　　{
+　　cout<<"judge not equal correct";
+　　break;
+　　}
+　　}
+　　}
+　　}
+　　void string::operator (string s1)
+　　{
+　　char n1[100];
+　　strcpy(n1,s1.line);
+　　int m;
+　　mstrlen(n1);
+　　int l;
+　　lstrlen(this->line);
+　　if(l!m)
+　　{
+　　cout<<"judge equal error";
+　　}
+　　else
+　　{
+　　for(int i0;i<l;i++)
+　　{
+　　if(line[i]n1[i])
+　　{
+　　if(il-1)
+　　cout<<"judge equal correct";
+　　}
+　　else
+　　{
+　　cout<<"judge equal error";
+　　break;
+　　}
+　　}
+　　}
+　　}
+　　char string::operator [](int pos)
+　　{
+　　int ipos;
+　　int lstrlen(line);
+　　if(i>-1&&i<l)
+　　{
+　　cout<<"The word at "<<pos<<" is "<<line[i]<<endl;
+　　return line[i];
+　　}
+　　else
+　　{
+　　cout<<"There is no word at "<<pos<<endl;
+　　return 0;
+　　}
+　　}
+　　void main()
+　　{
+　　string s("The line is a line.");
+　　cout<<"s.print():"<<endl;
+　　s.print();
+　　cout<<endl<<"s.turn():"<<endl;
+　　s.turn();
+　　cout<<endl<<"The length of the string is "<<s.strlength();
+　　cout<<endl<<"s.substring(4,12):"<<endl;
+　　s.substring(4,12);
+　　cout<<endl<<"s.insert(5,abcdefgh):"<<endl;
+　　s.insert(5,"abcdefgh");
+　　cout<<endl<<"s.index(LINE):"<<endl;
+　　s.index("LINE");
+　　cout<<endl<<"s.index(xyz):"<<endl;
+　　s.index("xyz");
+　　cout<<endl<<"s.replace(abc,DingTao)"<<endl;
+　　s.replace("abc","DingTao");
+　　cout<<endl<<"s.replace(req,dakfj)"<<endl;
+　　s.replace("req","dakfj");
+　　cout<<endl<<"s.strempty():"<<endl;
+　　s.strempty();
+　　string s1("abc"),s2("def"),s3("ghi"),s4("abcdefg"),s5("2008");
+　　cout<<endl<<"s1abc\ts2def\ts3ghi\ts4abcdefg\ts52008"<<endl;
+　　cout<<"after s1s1+s2 , s1";
+　　s1s1+s2;
+　　s1.print();
+　　cout<<endl<<"s1<s4"<<endl;
+　　s1<s4;
+　　cout<<endl<<"s2s4"<<endl;
+　　s2s4;
+　　cout<<endl<<"s2!s3"<<endl;
+　　s2!s3;
+　　cout<<endl<<"s5[3]"<<endl;
+　　s5[3];
+　　}

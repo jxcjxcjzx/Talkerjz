@@ -1,0 +1,31 @@
+//  help for building tip-helpiing system
+
+
+PImage a;
+  String hello = "ni hao";
+  String hellohelp = "this means hello in Chinese";
+  
+void setup()
+{
+  size(300,200);
+
+}
+
+void draw()
+{
+    background(213,20,0);
+    fill(0);
+    text(hello,50,50);
+    text(mouseX,10,height-10);
+    text(mouseY,50,height-10);
+    
+    if(mouseX<85&&mouseX>79&&mouseY>40&&mouseY<50){
+      tip(mouseX,mouseY);
+    }
+}
+
+void tip(int x,int y)    // the tip help system
+{
+  text(hellohelp,x+10,y-20);
+}
+

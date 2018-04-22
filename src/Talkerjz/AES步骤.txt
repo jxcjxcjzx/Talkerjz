@@ -1,0 +1,103 @@
+分享到QQ空间新浪微博百度搜藏人人网腾讯微博开心网腾讯朋友百度空间豆瓣网搜狐微博百度新首页QQ收藏和讯微博我的淘宝百度贴吧更多...百度分享
+首页我的主页相册广场消息 私信(1)模板设置退出 关注此空间liushijianlu的空间
+2010-03-14 18:51 AES加密算法主要步骤1 AES加密算法主要步骤
+1.1 AES算法整体描述
+l 给定一个明文x，将State初始化为x，并进行AddRoundKey操作，将RoundKey与State异或。
+l 对前Nr-1轮中的每一轮，用S盒对进行一次代换操作，称为SubBytes；对State做一置换ShiftRows；再对State做一次操作MixColumns；然后进行AddRoundKey操作。
+l 依次进行SubBytes、ShiftRows和AddRoundKey操作。
+l 将State定义为密文y。
+1.2 伪代码
+Cipher(byte in[4*Nb], byte out[4*Nb], word w[Nb*(Nr+1)])
+begin
+byte state[4,Nb]
+state = in
+AddRoundKey(state, w[0, Nb-1]) 
+for round = 1 step 1 to Nr-1
+SubBytes(state) 
+ShiftRows(state)
+MixColumns(state)
+AddRoundKey(state, w[round*Nb, (round+1)*Nb-1])
+end for
+SubBytes(state)
+ShiftRows(state)
+AddRoundKey(state, w[Nr*Nb, (Nr+1)*Nb-1])
+out = state
+end
+2 KeyExpansion()实现
+2.1要求
+将128 bit的密钥扩展至加密过程中的9轮循环，再上初始及最后2轮，需构造11轮密钥。每一轮密钥由4个字组成。每个字由4个byte组成。
+2.2 算法设计
+输入：byte[] key, byte[] w //key为密钥 w为扩展的密钥
+输出：byte[] w //扩展密钥 长度为4 * 4 * 11
+处理：
+1）建立一个4 byte的一维数组，存放一个字。Byte[] temp;
+2）将密钥key[0..15]送至w[0..15];//已赋值4个字给w。
+3) for I = 4 to 43
+   //以下每次处理一个字(32 bit)
+   temp = w[I-1];
+   if (I = 0 mod 4) //处理一个字 then
+    for j = 1 to 4 //字的4 byte处理
+在此循环中取temp数组下标的次序为1,2,3,0 //RotWord 操作
+     如果是字的首byte，取Rcon常数Rcon(I/4);
+     temp[j] = Sbox(temp[ (j + 1) /4]^Rcon常数
+            end for
+    temp = SubWord(RotWord(temp))⊕Rcon[i/4]
+        end if
+   w[I] = w[I-4]⊕temp;
+    end for
+4) 输出w
+3多项式乘法mod GF(28)运算
+3.1要求
+将两个byte在有限域GF(28)按多项式乘法，并mod 不可约多项式m(x)=x8+x4+x3+x+1。
+3.2 算法设计
+输入：byte a ,byte b
+输出：byte r
+数学基础：
+GF(28)有限域性质：两个元素的加法与两个字节按位模2加是一致的；乘法满足结合律；
+考虑多项式中的一项aixi（i∈0-7），用一次x乘以多项式：
+   b(x) = b7x7 + b6x6 + b5x5 + b4x4 + b3x3 + b2x2 + b1x + b0,
+得到
+   b7x8 + b6x7 + b5x6 + b4x5 + b3x4 + b2x3 + b1x2 + b0x (式1)
+将结果模m(x)求余得到x*b(x)。
+如果b7 = 0，则式1就是x*b(x)。
+如果b7 不等于0，则必须从式1中减去m(x)后结果为x*b(x)。用x乘一个多项式简称x乘。
+由此得出，aixi 乘以b(x)，可以作i次x乘。x(十六进制表示为0x02)乘可以用字节内左移一位和紧接着的一个与0x1b的按位模2加来实现，该运算暂记为xtime()。X的更高次的乘法可以通过重复应用xtime()来实现。通过将中间结果相加，任意乘法都可以利用xtime()来实现。例如：
+57 * 13 = fe ，这是因为：
+   57 * 02 = xtime(57) = ae
+   57 * 04 = xtime(ae) = 47
+   57 * 08 = xtime(47) = 8e
+   57 * 10 = xtime(8e) = 07
+所以
+   57 * 13 = 57 * ( 01⊕ 02 ⊕10 )
+     = 57⊕ ae⊕ 07
+     = fe
+
+
+4 Sbox生成
+4.1要求
+一个字节byte看作为一个在有限域GF(28)的多项式，求出它关于模m(x)的乘法逆，之后将该乘法逆在GF(2)上作仿射变换。
+4.2 算法设计
+输入：byte a
+输出：byte[] S
+数学逻辑：
+由有限域GF(28)性质。某个生成元（也是本原元）a，其a^(28-1) ≡ 1 mod m(x)。或a255 ≡ 1 mod m(x)。另外，a的从1到28-1的幂的值是构成了有限域GF(28)。
+由乘法逆的性质b * b -1 ≡ 1。求乘法逆可简化如下
+设 x = am ，设y是x的乘法逆，则y = a255-m
+处理：
+建立三个一组数组，分别为：byte S[255],byte L[255],byte E[255]。
+取本原元为a = 0x03，
+将a的0,1,2…255次方mod m(x)分另送至数组L中。a的运算参考前面的多项式乘法运算。如下伪码：
+For i = 0 to 255 
+   L[i] = ai (式2)
+End for
+为方便计算乘法逆的指数，数组E存放ai的幂指数i。将式2中ai值为数组E的下标，而将ai在数组L中的下标i作为数组E中对应的值。对应（式2）每一项有E[ai] = i。
+由上面两个数组L，E，可得到GF(28)域中的任一byte的乘法逆。
+设字节c它由ai生成的。其中a是GF(28)域中的生成元。欲求c的乘法逆。只需要找到a255-i即可。在数组E中可以由c查出生成元a的幂指数i。c-1的幂指数255-i。所以c-1 = L[255-i]。
+对每一个字节byte根据以上内容得到乘法逆，作仿射变换得到数组S。即为Sbox。
+#算法解析 分享到： 举报 浏览(609) 评论 转载 
+评论
+
+ 同时评论给  
+ 同时评论给原文作者   发布 500/0
+收起|查看更多
+帮助中心 | 空间客服 | 投诉中心 | 空间协议?2012 Baiduabcdef

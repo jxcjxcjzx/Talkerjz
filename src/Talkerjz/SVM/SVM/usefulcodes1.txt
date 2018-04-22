@@ -1,0 +1,22 @@
+// ways to show Chinese characters
+
+try{
+URL url = new URL("file:///E://SOFT HOME2/processing-1.5.1/for_summer/Talkerjz/diskmap.txt");                              
+InputStreamReader isr = new InputStreamReader(url.openStream(),"gbk");
+BufferedReader br = new BufferedReader(isr); 
+
+ BufferedReader brd = new BufferedReader(new FileReader("1")); 
+
+String b = br.readLine();
+String c = "ÄãºÃ";
+if(b.equals(c))
+  println("ÄãºÃ");
+
+}
+catch (IOException e) 
+	      {            
+	        e.printStackTrace();    
+	      }    
+
+
+

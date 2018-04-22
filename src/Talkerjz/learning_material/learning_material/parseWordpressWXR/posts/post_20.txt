@@ -1,0 +1,12 @@
+id=20
+A video test
+---
+Okay, it's on to something a little trickier.  In the version of WordPress that I downloaded a few months ago from their open source site, any link to a video would be exported as non-HTML, like
+[googlevideo link-to-video]
+Let me see how it goes if I embed a YouTube, Google Video, and DailyMotion videos:
+
+	 YouTube[youtube=http://www.youtube.com/watch?v=pY8jaGs7xJ0]
+
+	 Google Video [googlevideo=http://video.google.com/googleplayer.swf?docid=-8756242902799338281]
+	 Daily Motion [dailymotion id=xk6sn]
+	 Embedded video (MySpace) -- not supported

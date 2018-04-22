@@ -1,0 +1,406 @@
+
+您还未登录！|登录|注册|帮助
+ 首页
+ 业界
+ 移动
+ 云计算
+ 研发
+ 论坛
+ 博客
+ 下载
+ 
+更多
+ 
+
+
+
+
+
+
+
+blueman2012的专栏
+
+
+
+ 
+
+
+目录视图
+摘要视图
+订阅
+ . 
+
+
+
+2013年4月微软MVP申请开始啦！    写给13岁的CSDN论坛    CSDN博客频道年终送好礼！
+ 2012CSDN博客之星评选正式上线      2000元大奖征异构开发博文      Q14年互联网产品进化史 
+
+
+
+Apache Lucence 使用的一个简单例子 
+.
+ 分类： Java开发技术2011-09-21 10:37231人阅读评论(0)收藏举报
+
+Apache Lucence 使用的一个简单例子  
+ 
+ 
+//在C盘下创建一个s的文件夹,然后在s文件夹中新建三个文件:1.txt,3.txt,2.txt,,1.txt中输入"想 飞的我",2.txt中输入"想飞",3.txt中输入"我".接下来我们来看下面的测试:
+ 
+
+
+
+Java代码 
+
+ 
+ 
+package test;   
+ 01.  
+02.import java.io.File;   
+03.import java.io.FileReader;   
+04.import java.io.IOException;   
+05.import java.io.Reader;   
+06.import java.util.Date;   
+07.  
+08.import org.apache.lucene.analysis.Analyzer;   
+09.import org.apache.lucene.analysis.standard.StandardAnalyzer;   
+10.import org.apache.lucene.document.Document;   
+11.import org.apache.lucene.document.Field;   
+12.import org.apache.lucene.index.CorruptIndexException;   
+13.import org.apache.lucene.index.IndexWriter;   
+14.import org.apache.lucene.store.LockObtainFailedException;   
+15.//需要的apache下的lucene包   
+16./**  
+17.* 创建索引文件  
+18.*/  
+19.public class CreateIndex {   
+20.public static boolean createDocumentIndex()    
+21.{   
+22.   boolean bool = false;   
+23.   try{   
+24.   //需要索引的目录   
+25.   File dirpath = new File("c:\\s");   
+26.   //将索引文件存放在index目录下   
+27.   File indexpath = new File("c:\\index");   
+28.   //创建分词器   
+29.   Analyzer analyzer = new StandardAnalyzer();   
+30.   IndexWriter index = new IndexWriter(indexpath,analyzer,true);   
+31.     
+32.   File[] txtfiles = dirpath.listFiles();   
+33.     
+34.   long starttime = new Date().getTime();   
+35.     
+36.   for(int i=0;i<txtfiles.length;i++)   
+37.   {   
+38.    if(txtfiles[i].isFile())   
+39.    {   
+40.     System.out.println("文件"+txtfiles[i].getCanonicalPath()+"正在索引中...");   
+41.     Reader read = new FileReader(txtfiles[i]);   
+42.     Document doc = new Document();   
+43.     doc.add(new Field("content",read));   
+44.     doc.add(new Field("path",txtfiles[i].getAbsolutePath(),Field.Store.YES,Field.Index.NO));   
+45.     index.addDocument(doc);   
+46.    }   
+47.   }   
+48.   index.optimize();   
+49.   index.close();   
+50.        long endTime = new Date().getTime();      
+51.        System.out      
+52.                .println("这花费了"    
+53.                        + (endTime - starttime)      
+54.                        + " 毫秒来把文档增加到索引里面去!"    
+55.                        + dirpath.getPath());      
+56.   bool=true;   
+57.   }   
+58.   catch(Exception e)   
+59.   {   
+60.    bool = false;   
+61.   }   
+62.   return bool;   
+63.}   
+64./**  
+65.* 测试  
+66.*/  
+67.public static void main(String[] a)   
+68.{   
+69.CreateIndex.createDocumentIndex();   
+70.}   
+71.}   
+72.  
+73.测试结果:   
+74.  
+75.文件C:\s\1.txt正在索引中...   
+76.文件C:\s\2.txt正在索引中...   
+77.文件C:\s\3.txt正在索引中...   
+78.这花费了141 毫秒来把文档增加到索引里面去!c:\index   
+79.  
+80.  
+81.package test;   
+82.  
+83.import java.io.IOException;   
+84.  
+85.import org.apache.lucene.analysis.Analyzer;   
+86.import org.apache.lucene.analysis.standard.StandardAnalyzer;   
+87.import org.apache.lucene.queryParser.ParseException;   
+88.import org.apache.lucene.queryParser.QueryParser;   
+89.import org.apache.lucene.search.Hits;   
+90.import org.apache.lucene.search.IndexSearcher;   
+91.import org.apache.lucene.search.Query;   
+92./**  
+93.* 从索引文件查询内容  
+94.* @author Jan  
+95.*  
+96.*/  
+97.public class QueryString    
+98.{   
+99.public static void main(String[] args) throws IOException, ParseException {      
+100.         Hits hits = null;      
+101.         String queryString = "我";      
+102.         Query query = null;      
+103.         IndexSearcher searcher = new IndexSearcher("c:\\index");      
+104.      
+105.         Analyzer analyzer = new StandardAnalyzer();      
+106.         try {      
+107.             QueryParser qp = new QueryParser("content", analyzer);      
+108.             query = qp.parse(queryString);      
+109.         } catch (ParseException e) {      
+110.         }      
+111.         if (searcher != null) {      
+112.             hits = searcher.search(query);      
+113.             if (hits.length() > 0) {      
+114.                 System.out.println("找到:" + hits.length() + " 个结果!");      
+115.             }      
+116.         }      
+117.     }      
+118.}  
+ 
+
+
+[java] view plaincopy
+01.package test;  
+02.  
+03.import java.io.File;  
+04.import java.io.FileReader;  
+05.import java.io.IOException;  
+06.import java.io.Reader;  
+07.import java.util.Date;  
+08.  
+09.import org.apache.lucene.analysis.Analyzer;  
+10.import org.apache.lucene.analysis.standard.StandardAnalyzer;  
+11.import org.apache.lucene.document.Document;  
+12.import org.apache.lucene.document.Field;  
+13.import org.apache.lucene.index.CorruptIndexException;  
+14.import org.apache.lucene.index.IndexWriter;  
+15.import org.apache.lucene.store.LockObtainFailedException;  
+16.//需要的apache下的lucene包  
+17./** 
+18.* 创建索引文件 
+19.*/  
+20.public class CreateIndex {  
+21.public static boolean createDocumentIndex()   
+22.{  
+23.   boolean bool = false;  
+24.   try{  
+25.   //需要索引的目录  
+26.   File dirpath = new File("c:\\s");  
+27.   //将索引文件存放在index目录下  
+28.   File indexpath = new File("c:\\index");  
+29.   //创建分词器  
+30.   Analyzer analyzer = new StandardAnalyzer();  
+31.   IndexWriter index = new IndexWriter(indexpath,analyzer,true);  
+32.    
+33.   File[] txtfiles = dirpath.listFiles();  
+34.    
+35.   long starttime = new Date().getTime();  
+36.    
+37.   for(int i=0;i<txtfiles.length;i++)  
+38.   {  
+39.    if(txtfiles[i].isFile())  
+40.    {  
+41.     System.out.println("文件"+txtfiles[i].getCanonicalPath()+"正在索引中...");  
+42.     Reader read = new FileReader(txtfiles[i]);  
+43.     Document doc = new Document();  
+44.     doc.add(new Field("content",read));  
+45.     doc.add(new Field("path",txtfiles[i].getAbsolutePath(),Field.Store.YES,Field.Index.NO));  
+46.     index.addDocument(doc);  
+47.    }  
+48.   }  
+49.   index.optimize();  
+50.   index.close();  
+51.        long endTime = new Date().getTime();     
+52.        System.out     
+53.                .println("这花费了"   
+54.                        + (endTime - starttime)     
+55.                        + " 毫秒来把文档增加到索引里面去!"   
+56.                        + dirpath.getPath());     
+57.   bool=true;  
+58.   }  
+59.   catch(Exception e)  
+60.   {  
+61.    bool = false;  
+62.   }  
+63.   return bool;  
+64.}  
+65./** 
+66.* 测试 
+67.*/  
+68.public static void main(String[] a)  
+69.{  
+70.CreateIndex.createDocumentIndex();  
+71.}  
+72.}  
+73.  
+74.测试结果:  
+75.  
+76.文件C:\s\1.txt正在索引中...  
+77.文件C:\s\2.txt正在索引中...  
+78.文件C:\s\3.txt正在索引中...  
+79.这花费了141 毫秒来把文档增加到索引里面去!c:\index  
+80.  
+81.  
+82.package test;  
+83.  
+84.import java.io.IOException;  
+85.  
+86.import org.apache.lucene.analysis.Analyzer;  
+87.import org.apache.lucene.analysis.standard.StandardAnalyzer;  
+88.import org.apache.lucene.queryParser.ParseException;  
+89.import org.apache.lucene.queryParser.QueryParser;  
+90.import org.apache.lucene.search.Hits;  
+91.import org.apache.lucene.search.IndexSearcher;  
+92.import org.apache.lucene.search.Query;  
+93./** 
+94.* 从索引文件查询内容 
+95.* @author Jan 
+96.* 
+97.*/  
+98.public class QueryString   
+99.{  
+100.public static void main(String[] args) throws IOException, ParseException {     
+101.         Hits hits = null;     
+102.         String queryString = "我";     
+103.         Query query = null;     
+104.         IndexSearcher searcher = new IndexSearcher("c:\\index");     
+105.     
+106.         Analyzer analyzer = new StandardAnalyzer();     
+107.         try {     
+108.             QueryParser qp = new QueryParser("content", analyzer);     
+109.             query = qp.parse(queryString);     
+110.         } catch (ParseException e) {     
+111.         }     
+112.         if (searcher != null) {     
+113.             hits = searcher.search(query);     
+114.             if (hits.length() > 0) {     
+115.                 System.out.println("找到:" + hits.length() + " 个结果!");     
+116.             }     
+117.         }     
+118.     }     
+119.}  
+
+ 
+测试结果: 
+
+找到:2 个结果! 
+分享到： 
+
+上一篇：Lucene：基于Java的全文检索引擎简介
+下一篇：windows下如何建立.tar.gz格式的压缩文件？
+ . 
+
+
+查看评论
+ 
+
+  暂无评论
+
+
+ 
+
+
+您还没有登录,请[登录]或[注册]
+ 
+* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场
+ 
+
+
+
+
+
+
+
+
+个人资料
+
+blueman2012
+ 
+
+
+
+
+访问：22088次
+积分：541分
+排名：第18993名
+.原创：19篇
+转载：97篇
+译文：1篇
+评论：0条
+. 
+文章搜索
+
+. 
+文章分类Java开发技术(59)
+通信技术及实现(7)
+C/C++开发技术(2)
+数据库开发技术(8)
+Linux技术(25)
+Android技术(3)
+web开发技术(2)
+ 
+文章存档
+2012年02月(2).
+2011年12月(4).
+2011年11月(5).
+2011年10月(11).
+2011年09月(8).
+.
+.
+.
+.
+
+展开.
+ 
+阅读排行oracle 日期常用函數 (SYSDATE、日期格式) 收藏 (980)
+多线程 or 多进程 (906)
+连线被拒，请检查主机名称和埠号，并确定 postmaster 可以接受 TCP/IP 连线(870)
+Dom4j使用Xpath语法读取xml节点(557)
+Office Outlook 2007如何设置在服务器上保留邮件副本(523)
+电信行业BOSS系统(507)
+伯克利套接字（BSD Socket）(448)
+Oracle：清空表truncate详述(436)
+取模MOD和求余REM……JAVA的%原来只是REM(410)
+Dom4j完整教程(392)
+ 
+评论排行如何计算java对象占用的内存(0)
+伯克利套接字（BSD Socket）(0)
+INI档案(0)
+linux ln 命令的使用(0)
+linux 路由表维护(0)
+Linux ln 命令详解（这篇更准确）(0)
+try....catch...finally 妙用(0)
+wget命令详解(0)
+wget的几种典型用法(介绍典型的)(0)
+如何理解ip路由和操作linux的路由表(0)
+ 
+推荐文章 
+
+. 
+公司简介|招贤纳士|广告服务|银行汇款帐号|联系方式|版权声明|法律顾问|问题报告京 ICP 证 070598 号北京创新乐知信息技术有限公司 版权所有世纪乐知(北京)网络技术有限公司 提供技术支持江苏乐知网络技术有限公司 提供商务支持 联系邮箱：webmaster(at)csdn.netCopyright ? 1999-2012, CSDN.NET, All Rights Reserved  
+
+
+
+
+
+
+
+
+程序员杂志ipad1.2版发布送半年杂志
+ 

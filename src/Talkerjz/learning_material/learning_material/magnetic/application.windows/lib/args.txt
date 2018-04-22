@@ -1,0 +1,3 @@
+
+magnetic
+core.jar,magnetic.jar,core.jar

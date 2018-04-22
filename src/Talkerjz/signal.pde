@@ -51,6 +51,8 @@ class signal
   boolean centerstate = false;
   boolean applock = false;
   AudioPlayer public_song;
+  ddf.minim.Minim main_minim;
+  ddf.minim.Minim public_minim;  
   
   void reset()
   {
@@ -73,7 +75,7 @@ class signal
     String judge = null;
     judge = mainmode.vector + note.vector + pass120.vector
     +ques.vector+pianoplayer.vector+cameraone.vector+lockit.vector
-    +readbooks.vector+bookmarket.vector;
+    +readbooks.vector+bookmarket.vector+mapme.vector;
     if(!forjudge.equals(judge)){
       forjudge = judge;
       sig.sys_scroll = 0;

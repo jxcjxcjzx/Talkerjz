@@ -1,0 +1,8 @@
+id=17
+A test of newlines and labels/categories
+---
+We're having fun with tags, labels, and categories today on the Data Portability Testbed blog.
+
+What's your take on newlines, huh?
+
+Next up, video and embedded links which Wordpress outputs in a non-HTML format.
