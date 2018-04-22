@@ -1,0 +1,6 @@
+Hello! Here is the basement built by jxc for exploring your own interests and likes.
+And this the most important program we are going to carry out this year(2012), as a way to have a utter knowing of ourselves.
+The overall architecture of the basement will not be the same all the time, we are tent to change it according to our unique and different need, in corresponding to our program to be written.
+And I will have the detailed explanation after each change, you can check it on our time axis folder, each will be labeled with its time and name.
+I now expect to see the basement to be like the SQL like database, which means we will going to build a universally-applied user interface for use. This the work remaining to be done.
+And good luck to you, hope you have a exciting trip in this basement, discovering yourself more.

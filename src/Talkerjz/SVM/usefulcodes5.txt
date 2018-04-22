@@ -1,0 +1,48 @@
+boolean maincode = false;
+boolean fade = false;
+int fadealpha = 0;
+void setup() {
+  size(300,200);
+}
+void draw() {
+  background(0);
+  if (!maincode) {                          //maincode is false
+
+      //draw your splash screen
+    fill(255);                                 //example
+    rect(100,50,100,100);            //example
+
+    //Fade out
+    if (fade) {
+      fill(0,fadealpha);
+      rect(0,0,width,height);
+      fadealpha = fadealpha + 3;
+      if (fadealpha > 255) {
+        maincode = true;
+      }
+    }
+  } 
+  else {                                       //maincode is true
+
+    //draw your main program code
+    fill(255,0,0);                          //example
+    rect(100,50,100,100);          //example
+
+    //Fade in
+    if (fade) {
+      fill(0,fadealpha);
+      rect(0,0,width,height);
+      fadealpha = fadealpha - 3;
+      if (fadealpha < 0) {
+        fade = false;
+      }
+    }
+  }
+}
+
+void mousePressed() {
+  if(!fade)
+  fade = true;
+  else
+  fade = false;
+}

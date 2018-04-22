@@ -1,0 +1,149 @@
+Search processing.org:
+
+Cover \ Exhibition \ Reference \ Learning \ Download \ Discourse \ Contribute \ About FAQ
+ 
+Processing is an open source programming language and environment for people who want to program images, animation, and interactions. It is used by students, artists, designers, researchers, and hobbyists for learning, prototyping, and production. It is created to teach fundamentals of computer programming within a visual context and to serve as a software sketchbook and professional production tool.
+
+Processing is free to download and available for GNU/Linux, Mac OS X, and Windows. To contribute to the project's development, please visit http://dev.processing.org/, which includes bug tracking and instructions for building the code, downloading the source, and creating libraries and tools.
+
+Processing is an open project initiated by Ben Fry and Casey Reas. It evolved from ideas explored in the Aesthetics and Computation Group at the MIT Media Lab.
+
+Please check out recent Processing activity on the Web:
+
+OpenProcessing
+Processing @ Vimeo
+Processing @ del.icio.us
+Processing @ Flickr
+Processing @ YouTube
+
+31 Dec 2009
+Software from Golan Levin added to the exhibition.
+19 Dec 2009
+Software from Mikkel Koser added to the exhibition.
+17 Nov 2009
+Processing T-shirts now on sale.
+20 Oct 2009
+Processing 1.0.9 released.
+18 Oct 2009
+Processing 1.0.8 released.
+18 Oct 2009
+Software from Sabin+Jones LabStudio added to the exhibition.
+2 Oct 2009
+Software from Zum Kuckuck added to the exhibition.
+4 Sep 2009
+Processing 1.0.7 released.
+3 Sep 2009
+Software from Ben Hemmendinger added to the exhibition.
+24 Aug 2009
+Nine new libraries added to Contributions: ttslib by Nikolaus Gradwohl, MRI3DS and ObjImport by Victor Martins, integralhistogram by Giovanni Tarducci and Alessio Barducci, P-SURF by Claudio Fantacci and Alessandro Martini, CbModel by Federico Bartoli, UnwrappingLib by Martin Fuchs, Voltron by Joseph Scully, Arduino Library by David A. Mellis.
+19 Aug 2009
+Software from Tom Gerhardt added to the exhibition.
+12 Aug 2009
+Processing 1.0.6 released.Download here.
+30 Jul 2009
+Software from MOS (Michael Meredith, Hilary Sample, William Macfarlane) added to the exhibition. This is the one hundred and twenty-fourth project added to the exhibition. Have a look at the history.
+13 Jul 2009
+Terre Natale (Exits 2) software added to the exhibition.
+8 Jun 2009
+Processing 1.0.5 released. Download here.
+8 Jun 2009
+Software from Dimitre Lima added to the exhibition.
+31 May 2009
+Processing 1.0.4 released. Download here.
+14 May 2009
+Software from Marcus Wendt, Vera-Maria Glahn, and Arran Poole added to the exhibition.
+26 Apr 2009
+Interview with Aaron Koblin added to the features.
+26 Apr 2009
+Software from Aeolab added to the exhibition.
+2 Apr 2009
+Software from Josh Nimoy added to the exhibition.
+21 Mar 2009
+Software from Yunsil Heo and Hyunwoo Bang added to the exhibition.
+20 Mar 2009
+Five new libraries added to Contributions: superPoint by JohnG, SoundCipher by Andrew R. Brown, fluid forms libs by Stephen Williams, fullscreen api by Hansi Raber, BoxWrap2D by ewjordan.
+26 Feb 2009
+Software from Michael Hansmeyer added to the exhibition.
+Previous Updates \   RSS
+
+
+
+
+New Year's Cards, 2001-2010
+by Golan Levin
+
+
+
+COP15 Generative Identity
+by Mikkel Koser
+
+
+
+	
+ 	 
+Processing: A Programming Handbook for Visual Designers and Artists 
+By Casey Reas and Ben Fry
+Learning Processing
+By Daniel Shiffman
+ 	 
+	
+ 	 
+Visualizing Data
+By Ben Fry
+Processing: Creative Coding and Computational Art
+By Ira Greenberg
+More books related to Processing are included on the Books page.
+
+
+Arduino
+Wiring
+Processing Mobile
+
+Processing Implementations
+Processing.js
+Ruby-Processing
+Processing for Clojure
+Spde (Scala)
+
+Gaming, Graphics, and Video
+Blender
+Isadora
+Context Free 
+Design By Numbers
+DrawBot
+GEM
+Field
+Irrlicht
+JBox2D
+Jitter
+NodeBox
+Ogre
+openFrameworks
+Pygame
+Scriptographer
+Structure Synth
+VVVV
+
+Sound and Music
+ChucK
+Pure Data (PD)
+SuperCollider
+
+Electronics and Fabrication
+Fab@Home
+Gainer
+MAKE Controller
+Reactable
+RepRap
+
+Mobile Devices
+OpenMoko
+
+For the Younger Ones
+Alice
+Pippy
+Scratch
+
+
+Processing was initiated by Ben Fry and Casey Reas. It is developed by a small team of volunteers.
+© Info \ Site hosted by Media Temple!

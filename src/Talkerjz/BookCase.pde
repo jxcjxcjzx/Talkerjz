@@ -59,8 +59,8 @@ void handle_in_draw()
 {
     background(0,154,80);
     this.sys_scroll = sig.sys_scroll;
-  //  readbooks.sys_scroll = this.sys_scroll+width;
- //   readbooks.handle_in_setup();
+    readbooks.sys_scroll = this.sys_scroll+width;
+    readbooks.handle_in_setup();
     
     // the choice between the ChineseIn and the EnglishIn 
     if(!InputChinese){
@@ -532,7 +532,7 @@ int loadmaterial()
 {
        try{
             String readincontent = "";
-            URL url = new URL("file:///C:/Users/Administrator/Desktop/talkerjz5/ziku3.txt");         
+            URL url = new URL("file:///E:/Sep tem ber/Talkerjz_base/BookCase/ziku3.txt");         
             InputStreamReader isr = new InputStreamReader(url.openStream(),"gbk");
             BufferedReader br = new BufferedReader(isr); 
             while((readincontent = br.readLine())!=null){

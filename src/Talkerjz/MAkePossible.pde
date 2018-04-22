@@ -1,6 +1,4 @@
  // this class manage the pics 
-import java.io.*;
-
  picManager picask = new picManager();
  int comlink = 0;
 

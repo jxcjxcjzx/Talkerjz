@@ -1,5 +1,3 @@
-import java.text.SimpleDateFormat;
-
  PImage a1;
  PImage a2;
  PImage a3;

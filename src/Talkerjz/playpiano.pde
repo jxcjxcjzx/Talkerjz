@@ -1,11 +1,7 @@
-import ddf.minim.*;
-
 class playpiano
 {
         int spazio = 50;
         int value;
-        // for piano playing
-        ddf.minim.AudioPlayer public_song;
         
         int sys_scroll = 0;
         String vector = "0";
@@ -70,45 +66,45 @@ class playpiano
 //do
        if(sig.m_keypressed){
       if (key == 'a'){
-         public_song = sig.public_minim.loadFile("Re1.mp3");
-         public_song.play();
+       // sig.public_song = sig.public_minim.loadFile("Re1.mp3");
+       // sig.public_song.play();
         fill(38,222,57);
         rect(0*width/7+sys_scroll,height/2,width/7,height/2);
       }
       if ( key == 's'){
-           public_song = sig.public_minim.loadFile("Mi1.mp3");
-           public_song.play();
+        //sig.public_song = sig.public_minim.loadFile("Mi1.mp3");
+        //sig.public_song.play();
         fill(38,222,57);
         rect(1*width/7+sys_scroll,height/2,width/7,height/2);
       } 
       if ( key == 'd'){
-          public_song = sig.public_minim.loadFile("Fa1.mp3");
-          public_song.play();
+       // sig.public_song = sig.public_minim.loadFile("Fa1.mp3");
+       // sig.public_song.play();
         fill(38,222,57);
         rect(2*width/7+sys_scroll,height/2,width/7,height/2);        
       }
       if (key == 'f'){
-           public_song = sig.public_minim.loadFile("Sol1.mp3");
-           public_song.play();
+       // sig.public_song = sig.public_minim.loadFile("Sol1.mp3");
+       // sig.public_song.play();
         fill(38,222,57);
         rect(3*width/7+sys_scroll,height/2,width/7,height/2);
       }
       if (key == 'g'){
-           public_song = sig.public_minim.loadFile("La1.mp3");
-           public_song.play();
+       // sig.public_song = sig.public_minim.loadFile("La1.mp3");
+        //sig.public_song.play();
         fill(38,222,57);
         rect(4*width/7+sys_scroll,height/2,width/7,height/2);        
       }
 
       if (key == 'h'){
-          public_song = sig.public_minim.loadFile("Si1.mp3");
-          public_song.play();
+       // sig.public_song = sig.public_minim.loadFile("Si1.mp3");
+        //sig.public_song.play();
         fill(38,222,57);
         rect(5*width/7+sys_scroll,height/2,width/7,height/2);        
       }
       if (key == 'j'){
-          public_song = sig.public_minim.loadFile("Do2.mp3");
-          public_song.play();
+       // sig.public_song = sig.public_minim.loadFile("Do2.mp3");
+       // sig.public_song.play();
         fill(38,222,57);
         rect(6*width/7+sys_scroll,height/2,width/7,height/2);
       }    

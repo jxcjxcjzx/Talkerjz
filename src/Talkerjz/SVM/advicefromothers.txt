@@ -1,0 +1,72 @@
+print-screen function
+1.add some random sound may help
+2.function of showing a image,play a song
+3.keep user's habit in mind, always
+4.add color functions which add to some fun
+5.a reminder or helper like a little dog add make it more user-friendly, it can provide some useful advice
+6.provide some active games for playing
+7.a scrolling function make it awesome
+8.use picture as the background and supply some choice for user
+9.through chapter-list format provide the possibility to see the change of different mode
+10.3D elemants
+11.set the request into the text for computer to look in
+12.supply the choice to change the text-form
+13.some warm remindings like time-remind
+14.do some help in designing work
+15.some animation along with the song-playing
+16.automatically change to night mode(flash light mode) after automatically detect the night time
+17.xml support and other file-type-support
+18.special-built port for information collected from the other tools like FlowerWeel and info like the health info(refer to example in foros_xml_load)
+19.provide different-users support
+20.provider some suggestions for the use of the computer, so this can be called the suggestion-mode
+21.use xml as a good small-size database(an example may be the ImViz project)
+22.visual protect mode, picture browser in the picture-browser mode,providing screen shielding
+23.log on the Internet to get some news for you in the net-mode
+24.games outside-interface or just a link like to the game magnetic when the user is tired.(see the example called magnetic)
+25.supply slide bar to dematically set some values during use
+26.net-based analysis of files and records
+27.cube-like several threads or like that in Linux 3D desktop
+28.draw a connection-map for files in the disk based on the user's using history
+29.tree-shaped engine to enhance the performance of search or analysis
+30.provide icon-designing function
+31.provide a board for drawing
+32.3D display
+33.add for dinamic screen-protecting
+34.again the time-management, add in some wise and hommization-like remind, like using it for long, remind the user to take a rest.
+35.add in the "su" function to imitate the situation in Linux
+36.the record each time it is used
+37.come-in password
+38.strong help in design work with art
+39.help in pick a clothes and lunch for you
+40.network-built in user's computer
+41.suggestion-mode, in which mode the user can edit the tip for help
+42.advanced studying pattern using neural-network way.
+43.provide ability to do things at the same time
+44.fast charts-made function integrated
+45.note reminder function
+46.color assort and choice system, it can learn to pick good colors
+47.make several optional desks-style
+48.car-game, learn from bounce project
+49.a mouse click to change color of screen
+50.new learning-method, learn and apply in BachelorMachine project
+51.standard showing platform, you can show pictures, show text, even show a car! 
+52.platform for sharing files between different users
+53.use all kinds of ways to add to the space of screen, like pop-out frame when mouse move to the rim of the dialog
+54.perfect showing platform like that in OrganizationCritters project, the board can rotate in crosswise and overturn up and down using CAM-A and CAM-Y adjusting,awesome!
+55.provide several inbulit text-analysis modes and showing ways,one of which can be like in project P_3_1_3_04
+56.powerpoint-like showing text, like in parseWordpressWXR project
+57.wise reminder for special days like holiday and birthday, set one file in advance
+58.draw some random pictures for fun
+59.opencloud and textcloud support, learn from SubRipTagCloud project and TagCloudDemoWithOpenCloud project
+60.using different colors to build a 3D like effect
+61.try to build ripple and wind
+62.the cursor show and copy function
+63.text engine use wordcram, learn in project usConstitution
+64.perfect Chinese-character support
+65.zoom in and zoom out support
+66.ripple-like effect, learn in the ripples class in water-music project
+67.word showing engine, learn in wordcloud project
+
+
+
+next time start from sketch_mar16d in new_add_in

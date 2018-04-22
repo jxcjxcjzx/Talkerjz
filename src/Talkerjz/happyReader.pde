@@ -1,13 +1,7 @@
-/*
-
 import java.awt.FileDialog; 
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import Luxand.*;
-import Luxand.FSDK.*;
-import Luxand.FSDKCam.*;
 
 
 ArrayList<String> bookcontent;
@@ -15,29 +9,10 @@ ArrayList<String> booknamelist;
 ArrayList<String> bookposlist;
 boolean opened = false;
 int booklistindex = 0;
-String TheOpenFileWay = "utf-8";
 
 class happyReader
 {
-int jishu = 0;
-boolean auto_detect = false;
-boolean detect_initial = false;
 
-TCameras CameraList = new TCameras();
-int CameraCount[] = new int[19];
-TCameras CameraNameList = new TCameras();
-TCameras CameraDevicePathList = new TCameras();
-HCamera CameraHandle = new HCamera();
-String camera_name = "";
-HImage Image = new HImage();
-String HardwareID[] = {"vbwhjbhjwsbjhb"};
-String LicenseInfo ="MWMz5NI2Ok++deLjspWTIiwgapVBHACp24tZgoP7oqgj37703k7SU07Tj2/CvBMIQXyWnuWNqTKaQTsTAkILs/vP6bCAboxHxgv9j+JMn0OT8ZzZGl5VBRhNxCFh1T5hgYsZPoHrX7ArUQiSPspFtPcG9YNBYVPJZjFXso11nug=";
-FSDK_Features.ByReference feature_for_me = new FSDK_Features.ByReference();
-int current_y = 0;
-int compare = 0;
-int ball_place = 0;  
-  
-  
 PImage a;
 PImage bookmark;
 PImage ascroll;
@@ -63,8 +38,6 @@ boolean whetheradd = false;
 // the standard configuration
 int sys_scroll = 0;
 String vector = "0";
-
-
 
 boolean inpower()
 {
@@ -104,31 +77,6 @@ void handle_in_setup()
        pos[weizhi] = 150*weizhi-300;
        }
        mouseWheelSetup2();
-       
-      if(FSDK.FSDKE_OK==FSDK.GetHardware_ID(HardwareID)){
-
-      }
-      if(FSDK.FSDKE_OK==FSDK.ActivateLibrary(LicenseInfo))
-      {
-
-      }
-      if(FSDK.FSDKE_OK==FSDK.Initialize())
-      {
-      
-      }     
-      if(FSDK.FSDKE_OK==FSDKCam.InitializeCapturing()){
-      }
-    
-      if(FSDK.FSDKE_OK == FSDKCam.SetCameraNaming(false)){
-      }
-    
-      if(FSDK.FSDKE_OK ==FSDKCam.GetCameraList(CameraList, CameraCount)){
-      }    
-      if(FSDK.FSDKE_OK == FSDKCam.GetCameraListEx(CameraNameList,CameraDevicePathList,CameraCount))
-      {
-        camera_name = CameraNameList.cameras[0];
-      }
-      
        whetheradd = true;
     }
            // initial drawing 
@@ -181,27 +129,6 @@ void handle_in_draw()
    }
    // textmode  area
    if(entertextmode){
-       if(!auto_detect){
-           if(FSDK.FSDKE_OK==FSDKCam.CloseVideoCamera(CameraHandle)){
-           }    
-         //video.stop();
-       }
-       if(auto_detect){
-         if(!detect_initial){
-         if(FSDK.FSDKE_OK == FSDKCam.OpenVideoCamera(camera_name,CameraHandle)){
-         }
-           //video.start();              
-           detect_initial = true;
-         }
-         jishu++;
-         if(jishu==40){
-              jishu=0;
-              if(FSDK.FSDKE_OK == FSDKCam.GrabFrame(CameraHandle,Image)){     
-                  detectface(Image);  
-              }    
-         }         
-       }
-       
        showtext(bookcontent,colorchoice);
    }
    
@@ -254,7 +181,6 @@ if(sig.m_mousepressed)
     opened = true;
     }else{
     openicon(bookposlist.get(booklistindex+1));
-    viewadjust = 0;
     opened = true;
     }
   }
@@ -271,23 +197,6 @@ if(sig.m_mousepressed)
     if(currentpic==136){
     currentpic=1;
     }
-  }
-  
-  if(key=='a'){
-    auto_detect = true;
-    
-  }
-  if(key=='n'){
-    auto_detect = false;
-    detect_initial = false;    
-  }
-  
-  if(key=='u'){
-    TheOpenFileWay = "utf-8";
-  }
-  
-  if(key=='g'){
-    TheOpenFileWay = "gbk";
   }
   
   // choose the color
@@ -365,26 +274,6 @@ if(sig.m_mousepressed)
 }
 
 
-}
-
-
-void detectface(HImage for_detect)
-{
-      if(FSDK.FSDKE_OK==FSDK.DetectFacialFeatures(for_detect,feature_for_me))
-      {
-          compare = (feature_for_me.features[0].y+feature_for_me.features[1].y)/2;
-          if(compare>current_y&&(compare-current_y)>1){
-            current_y = compare;
-            ball_place = current_y;
-            viewadjust-=340;
-          }
-          else{
-            if(compare<current_y&&(current_y-compare)>5){
-            current_y = compare;
-            ball_place = current_y;              
-            }
-          }
-      }
 }
 
 // 特效显示图标
@@ -526,7 +415,7 @@ class FileOpen
       
           try{
           URL url = new URL("file:///"+fileopenloc+filename);         
-          InputStreamReader isr = new InputStreamReader(url.openStream(),TheOpenFileWay);
+          InputStreamReader isr = new InputStreamReader(url.openStream(),"gbk");
           BufferedReader br = new BufferedReader(isr); 
           while((readincontent = br.readLine())!=null){
                 bookcontent.add(readincontent);   
@@ -546,5 +435,3 @@ class FileOpen
   } 
 
 }
-
-*/

@@ -1,21 +1,24 @@
 
 class Sys_timer
-{  
-  ddf.minim.AudioPlayer player;
+{
+  Player p;
   void init_timer()
   {
     try{
-         player = sig.main_minim.loadFile("sunset.mp3",1024);     
+       File f = new File("E:/SOFT HOME2/processing-1.5.1/Talker_foryou/Talkerjz/data/sunset.mp3"); 
+       MediaLocator ml = new MediaLocator(f.toURL()); 
+       p = Manager.createPlayer(ml);        
     }
-    catch (Exception e){        
+    catch (Exception e){
+        
     }
   }
   
   void action_performed()
   {
-    sig.main_minim.stop();
-    player = sig.main_minim.loadFile("sunset.mp3", 1024);
-    player.play();
+     p.stop();
+     this.init_timer();
+     p.start(); 
   }
 
 }

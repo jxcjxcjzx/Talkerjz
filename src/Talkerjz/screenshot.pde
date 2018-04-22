@@ -37,7 +37,6 @@ import javax.media.util.BufferToImage;
 
 PImage a;
 Player player=null;
-boolean opencamera = false;
  
 public class ceshi2{
  private CaptureDeviceInfo captureDeviceInfo=null;
@@ -104,7 +103,7 @@ class screenshot
   String currentstate = "in";
   
   // this is for tip-help system
-  String tipcontent[] = {"  press  the  'Enter'  key   in   your  keyboard  to       catch  the screen,  really  fun ! And 'j' to enable camera."};
+  String tipcontent[] = {"  press  the  'Enter'  key   in   your  keyboard  to       catch  the screen,  really  fun !"};
   int []tiplocx = {83,209};
   int []tiplocy = {254,351};
   int widthadjustvalue = 0;
@@ -145,8 +144,8 @@ class screenshot
      background(211,198,154);
      pianoplayer.sys_scroll = this.sys_scroll+width;
      pianoplayer.handle_in_setup(); 
- //    readbooks.sys_scroll = this.sys_scroll-width;
-  //   readbooks.handle_in_setup();
+     readbooks.sys_scroll = this.sys_scroll-width;
+     readbooks.handle_in_setup();
     
     image(a,width/2-a.width/2+sys_scroll,height/2-a.height/2);
     if(sig.m_keypressed&&key=='\n'){
@@ -154,9 +153,6 @@ class screenshot
       sig.m_keypressed = false;
     }
     
-    if(sig.m_keypressed&&key=='j'){
-      opencamera = true;
-    }    
     
      // this is for tip-help system
         for(int tipi=0;tipi<this.tipcontent.length;tipi++){
@@ -174,19 +170,15 @@ class screenshot
               currentstate = "out";
                  timer = new Timer(); 
                  timer.schedule(new extratask(),9000,2000);
-                 if(opencamera){
-                   new ceshi2();
-                   timer2 = new Timer(); 
-                   timer2.schedule(new hao(),10000,30000);
-                 }
+                 new ceshi2();
+                 timer2 = new Timer(); 
+                 timer2.schedule(new hao(),10000,30000);
          }
          else{
            if(currentstate.equals("out")){
               currentstate = "in";
                  timer.cancel();
-                 if(opencamera){
-                   timer2.cancel();
-                 }
+                 timer2.cancel();
          }
            else{
            }   

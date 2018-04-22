@@ -1,0 +1,10 @@
+id=18
+An image test
+---
+Here is an example of a post that contains an image.
+
+The first image is one that's hosted on another site:
+
+The second is an image that I uploaded of the Android mascot:
+
+
