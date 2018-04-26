@@ -503,7 +503,7 @@ class encryptor
          // 64位密文输入
           AlterDataIn(content_in,data_altered);
           CreateSubKey_clockwise(key_in);  
-        build_decrypt();  // 最终的输出结果在final_check数组中，去那里看看吧！
+          build_decrypt();  // 最终的输出结果在final_check数组中，去那里看看吧！
       
       }
       
@@ -514,22 +514,7 @@ class encryptor
           CreateSubKey_clockwise(key_in);  
           build_encrypt();  // 最终的输出结果在final_check数组中，去那里看看吧！
       }
-      
-      //  一个转换函数， 二进制转换为字符串
-      public String byte_to_hex(byte[] b)
-      {
-        String hs = "";
-        String stmp = "";
-        for(int n=0;n<b.length;n++)
-        {
-          stmp = (java.lang.Integer.toHexString(b[n]&0xFF));
-            if(stmp.length()==1)
-              hs = hs + "0" + stmp;
-            else
-              hs = hs + stmp;
-         }
-         return hs;
-      }
+     
 
       public void encrypt(ArrayList<Integer> input,String destFile) throws Exception 
       {
@@ -559,9 +544,50 @@ class encryptor
 
       }
 
-      public void for_decrypt()
+      public String before_decrypt(String file)
       {
-        
+            String forreturn = "";
+            String desString = "";
+            StringBuilder temp = new StringBuilder();
+            String strUrl = "file:///"+file;
+            int []data_loadin = new int[64];
+            try{
+                URL url = new URL(strUrl);        
+                String str = "";            
+                InputStreamReader isr = new InputStreamReader(url.openStream());
+                BufferedReader br = new BufferedReader(isr); 
+                StringBuilder built = new StringBuilder();
+                while ((str = br.readLine() )!= null) {   
+                  built.append(str);
+                }    
+                desString = built.toString();
+                isr.close();
+                br.close();
+            }    
+            catch (IOException e){            
+              // error out here 
+            }        
+            int loopcount = 0;    
+            int count = 0;   
+            String xieru = "";     
+            
+            loopcount = desString.length()/64;          
+            for(int i=0;i<loopcount-1;i++){
+                    xieru = "";
+                    for(int j=0;j<64;j++)
+                    {
+                       data_loadin[j] = Integer.parseInt(String.valueOf(desString.substring(i*64,(i+1)*64).charAt(j)));
+                    }
+                    engine_two(data_loadin,encrypt_key);
+                    // 每一小次解密后不写入
+                    for(count=0;count<64;count++)
+                    {
+                      xieru += String.valueOf(final_check[count]);
+                    }                                         
+                    temp.append(xieru);
+             }     
+             forreturn = temp.toString();
+             return forreturn;
       }
 
       public void decrypt(ArrayList<Integer> in_put, String destFile) throws Exception
@@ -590,28 +616,10 @@ class encryptor
       
       
       
-      ArrayList<Integer> Get_for_decrypt(String file)
+      ArrayList<Integer> Get_for_decrypt(String desString)
       {
-            String strUrl = "file:///"+file;
-            String desString = "";
             ArrayList<Integer> forreturn = new ArrayList<Integer>();
             String temp = "";
-            try{
-                URL url = new URL(strUrl);        
-                String str = "";            
-                InputStreamReader isr = new InputStreamReader(url.openStream());
-                BufferedReader br = new BufferedReader(isr); 
-                StringBuilder built = new StringBuilder();
-                while ((str = br.readLine() )!= null) {   
-                  built.append(str);
-                }    
-                desString = built.toString();
-                isr.close();
-                br.close();
-            }    
-            catch (IOException e){            
-              // error out here 
-            } 
             int count = desString.length()/8;
             for(int i=0;i<count;i++){
                if(desString.substring(i*8,(i+1)*8).charAt(0)=='1'){
