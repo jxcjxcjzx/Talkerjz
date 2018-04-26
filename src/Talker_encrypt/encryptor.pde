@@ -258,9 +258,12 @@ class encryptor
                 encrypt_key[j] = (tmp[w] >> k) & 1;
             }
       } 
-
+  
+  
     return forreturn;
   }
+
+  
   
         void LR(int in[], int out[], int ls)//  循环左移位函数
       {
@@ -270,6 +273,10 @@ class encryptor
           for (i = ls; i < 28; i++)
               out[i-ls] = in[i];
       }
+
+
+
+
 
       void CreateSubKey_clockwise(int key[])  // 这个是加密过程中使用的,key数组shi 64位的
       {
@@ -290,7 +297,8 @@ class encryptor
            encrypt_D[0][i] = key[change_table_1_R[i]-1];
         }
         // 这样产生了需要的初始的c0和d0
-             
+       
+      
         for(count=0;count<16;count++)
         {
             LR(encrypt_C[count],encrypt_C[count+1],left_shift_count[count]);
@@ -312,7 +320,9 @@ class encryptor
         }
        // testing point      
       }
-            
+      
+      
+      
       void AlterDataIn(int pre_data[], int after_data[])  // 产生初始的数据
       {
          // 这个函数对输入的数据进行变换，根据的是置换IP
@@ -355,24 +365,28 @@ class encryptor
           int i,x,y,z;
           int data_in_pointer = 0;
         for(i=0;i<8;i++)
-        {      
+        {
+      
           x = (data_in_1[0+data_in_pointer]<<1) + (data_in_1[5+data_in_pointer]);
           y = (data_in_1[1+data_in_pointer]<<3) + (data_in_1[2+data_in_pointer]<<2)
           + (data_in_1[3+data_in_pointer]<<1) + (data_in_1[4+data_in_pointer]);
           z = S[i][x][y];  
       
-            for_S_alter[0+4*i] = (z >> 3) & 1;
+          for_S_alter[0+4*i] = (z >> 3) & 1;
             for_S_alter[1+4*i] = (z >> 2) & 1;
             for_S_alter[2+4*i] = (z >> 1) & 1;
             for_S_alter[3+4*i] = z & 1;
-          data_in_pointer += 6;          
+          data_in_pointer += 6;
+          
         }
       
           for(i=0;i<32;i++)
         {
           alter_to_P[i] = for_S_alter[P[i]-1];
         }
-         
+      
+      
+      
       }
       
       void build_encrypt()   // 逆置换IP得到最终的加密的结果
@@ -383,7 +397,8 @@ class encryptor
         {
           data_C[0][i] = data_altered[i];
             data_D[0][i] = data_altered[i+32];
-        }       
+        } 
+      
       
           for(j=0;j<16;j++)   // 16轮的加密过程
         {
@@ -437,7 +452,7 @@ class encryptor
           int i,j;
         for(i=0;i<32;i++)
         {
-            data_C[0][i] = data_altered[i];
+          data_C[0][i] = data_altered[i];
             data_D[0][i] = data_altered[i+32];
         } 
       
@@ -489,7 +504,8 @@ class encryptor
          // 64位密文输入
           AlterDataIn(content_in,data_altered);
           CreateSubKey_clockwise(key_in);  
-          build_decrypt();  // 最终的输出结果在final_check数组中，去那里看看吧！      
+        build_decrypt();  // 最终的输出结果在final_check数组中，去那里看看吧！
+      
       }
       
       void engine_one(int content_in[], int key_in[])   // content 是64位的,输出也是64位的,加密的函数
@@ -499,218 +515,74 @@ class encryptor
           CreateSubKey_clockwise(key_in);  
           build_encrypt();  // 最终的输出结果在final_check数组中，去那里看看吧！
       }
-     
-      public void encrypt(ArrayList<Integer> input,String destFile) throws Exception 
+      
+      //  一个转换函数， 二进制转换为字符串
+      public String byte_to_hex(byte[] b)
       {
-            BufferedWriter   out=new   BufferedWriter(  new   FileWriter(new File(destFile) ,true));       
-            StringBuilder toadd = new StringBuilder();
-            int []data_loadin = new int[64];
-            int count = 0;
-            int loopcount = 0;
-                   //testing point
-                    for(int kk=0;kk<64;kk++){
-                       print(encrypt_key[kk]);                         
-                    }
-                    println();
-                    
-            
-            loopcount = input.size()/64;             
-                               
-             for(int i=0;i<loopcount-1;i++){
-                    for(int j=0;j<64;j++)
-                    {
-                       data_loadin[j] = input.get(j+i*64);
-                    }
-                    engine_one(data_loadin,encrypt_key);
-                    
-                    // 每一小次加密后写入
-                    for(count=0;count<64;count++)
-                    {
-                      toadd.append(final_check[count]);                      
-                    }                           
-                    out.write(toadd.toString());   
-                    toadd.delete(0,final_check.length);
-             }
-            out.close();
+        String hs = "";
+        String stmp = "";
+        for(int n=0;n<b.length;n++)
+        {
+          stmp = (java.lang.Integer.toHexString(b[n]&0xFF));
+            if(stmp.length()==1)
+              hs = hs + "0" + stmp;
+            else
+              hs = hs + stmp;
+         }
+         return hs;
       }
 
-      public String before_decrypt(String file)
+      public void encrypt(String destFile) throws Exception 
       {
-            String forreturn = "";
-            String desString = "";
-            StringBuilder temp = new StringBuilder();
-            String strUrl = "file:///"+file;
             int []data_loadin = new int[64];
-            try{
-                URL url = new URL(strUrl);        
-                String str = "";            
-                InputStreamReader isr = new InputStreamReader(url.openStream());
-                BufferedReader br = new BufferedReader(isr); 
-                StringBuilder built = new StringBuilder();
-                while ((str = br.readLine() )!= null) {   
-                  built.append(str);
-                }    
-                desString = built.toString();
-                isr.close();
-                br.close();
-            }    
-            catch (IOException e){            
-              // error out here 
-            }        
-            int loopcount = 0;    
-            int count = 0;   
-            String xieru = "";     
-            
-            loopcount = desString.length()/64;          
-            for(int i=0;i<loopcount-1;i++){
-                    xieru = "";
-                    for(int j=0;j<64;j++)
-                    {
-                       data_loadin[j] = Integer.parseInt(String.valueOf(desString.substring(i*64,(i+1)*64).charAt(j)));
+            int first_level = 0;  // 数组标记变量
+            int second_level = 0;
+            int count = 0;
+            String xieru = "";// 用于写入
+            int r = 0;  // 用于标识读取的字符的数量的变量， 为-1的时候表示读到了文件的尾部
+            byte[] bytes = new byte[8];
+            byte[] loadout = new byte[64];
+            while((r = input.read(bytes,0,8))!=-1){
+                // testing 
+                print(r);
+                    // 这个时候进行加密
+                    // 将byte 变换到需要的int类型
+                    
+                   for(first_level = 0;first_level<8;first_level++){ 
+                    for(second_level=0;second_level<8;second_level++){
+                      data_loadin[first_level*8+second_level] = bytes[first_level]>>(7-second_level)&1;
                     }
-                    engine_two(data_loadin,encrypt_key);
-                    // 每一小次解密后不写入
+                   }
+
+                    engine_one(data_loadin,encrypt_key);
+                    // 每一小次加密后写入
+                    
                     for(count=0;count<64;count++)
                     {
                       xieru += String.valueOf(final_check[count]);
-                    }                                         
-                    temp.append(xieru);
-             }     
-             forreturn = temp.toString();
-             return forreturn;
+                    }
+                    out.write(xieru);   
+                    xieru = "";
+                    
+            }          
+            out.close();
+            input.close();
       }
 
-      public void decrypt(ArrayList<Integer> in_put, String destFile) throws Exception
+      public void decrypt(String file, String dest) throws Exception
       {
-            BufferedWriter   out=new   BufferedWriter(  new   FileWriter(new File(destFile) ,true)); 
-            byte[] b_for_one = new byte[1];   
-            byte[] b_for_two = new byte[2];               
-            String ming = "";
-            for(int i=0;i<in_put.size()-1;i++){
-                if(in_put.get(i)>0){
-                  b_for_one[0] = in_put.get(i).byteValue();
-                  ming = new String(b_for_one,"gbk"); 
-                  out.write(ming); 
-                }
-                if(in_put.get(i)<0){
-                  b_for_two[0] = in_put.get(i).byteValue();
-                  b_for_two[1] = in_put.get(i+1).byteValue();
-                  ming = new String(b_for_two,"gbk"); 
-                  out.write(ming); 
-                  i++;
-                }
-
-            }            
-            out.close();            
-      }
       
-      
-      
-      ArrayList<Integer> Get_for_decrypt(String desString)
-      {
-            ArrayList<Integer> forreturn = new ArrayList<Integer>();
-            String temp = "";
-            int count = desString.length()/8;
-            for(int i=0;i<count;i++){
-               if(desString.substring(i*8,(i+1)*8).charAt(0)=='1'){
-                 temp = "";
-                 for(int j=0;j<8;j++){
-                     if(desString.substring(i*8,(i+1)*8).charAt(j)=='1'){
-                       temp += "0";
-                     }
-                     if(desString.substring(i*8,(i+1)*8).charAt(j)=='0'){
-                       temp += "1";
-                     }                                      
-                 }
-                 forreturn.add(Integer.parseInt(temp, 2)*(-1)-1);
-               }
-               else{
-                 forreturn.add(Integer.parseInt(desString.substring(i*8,(i+1)*8), 2));
-               }
-            }
-            return forreturn;      
       }
       
       ArrayList<Integer> Get_Input_Bytes(String file)
       {
         ArrayList<Integer> forreturn = new ArrayList<Integer>();
-        ArrayList<String> temp = new ArrayList<String>();
-        String strUrl = "file:///"+file;
-        String desString = "";
-        try{
-            URL url = new URL(strUrl);        
-            String str = "";            
-            InputStreamReader isr = new InputStreamReader(url.openStream(),"gbk");
-            BufferedReader br = new BufferedReader(isr); 
-            StringBuilder built = new StringBuilder();
-            while ((str = br.readLine() )!= null) {   
-              built.append(str);
-            }
-            built.append("您好，欢迎阁下使用本软件，本软件是在talkerjz软件中心中免费发布，由Mr jxc开发的，希望能给您带来帮助！");
-            desString = built.toString();
-            byte[] store = desString.getBytes("gbk");  
-            for(int i=0;i<store.length;i++){
-              for(int j=0;j<8;j++){
-                temp.add(String.valueOf(this.Judge_Byte(Integer.toBinaryString(store[i])).charAt(j)));
-              }
-            }         
-            isr.close();
-            br.close();
-        }
-        catch (IOException e){            
-          // error out here 
-        } 
-        // here we can add some back handling 
-        forreturn = this.Str2Inte(temp);
+            BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
+            BufferedWriter   out=new   BufferedWriter(  new   FileWriter(new File(destFile) ,true));        
         return forreturn;
       }
       
-      ArrayList<Integer> Str2Inte(ArrayList<String> forexch)
-      {
-         ArrayList<Integer> forreturn = new ArrayList<Integer>();
-         for(int i=0;i<forexch.size();i++)
-         {
-           forreturn.add(Integer.parseInt(String.valueOf(forexch.get(i))));
-         }
-         return forreturn;
-      }
       
-      String Judge_Byte(String in_content)
-      {
-        StringBuilder returnit = new StringBuilder();
-        int count = in_content.length();
-        String[] forjudge = new String[count];
-        String[] forreturn = new String[8];
-        for(int i=0;i<count;i++){
-          forjudge[i] = String.valueOf(in_content.charAt(i));
-        }
-        if(6==count){
-           forreturn[0] = "0";
-           forreturn[1] = "0";
-           for(int i=0;i<6;i++)
-           {
-              forreturn[i+2] = forjudge[i];
-           }
-        }
-        if(7==count){
-           forreturn[0] = "0";
-           for(int i=0;i<7;i++)
-           {
-              forreturn[i+1] = forjudge[i];
-           }           
-        }        
-        if(count>7){
-            forreturn[0] = "1";
-              for(int i=0;i<7;i++)
-              {
-                forreturn[i+1] = forjudge[count-1-(6-i)];
-              }
-        }
-        for(int i=0;i<8;i++){
-           returnit.append(String.valueOf(forreturn[i]));
-        }
-        return returnit.toString();
-      }
 
 
 }

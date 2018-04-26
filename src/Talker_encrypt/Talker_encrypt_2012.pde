@@ -78,7 +78,7 @@ void mousePressed()
               try{
               encryptor td = new encryptor();
               defaultkey = td.getkey(password);         
-              td.encrypt(td.Get_Input_Bytes(fileaddr),fileaddr2+fileaddr3+"_"+"encrypt.txt");
+              td.encrypt(fileaddr,fileaddr2+fileaddr3+"_"+"encrypt.txt");
               showpass = "加密成功";
               }
               catch (Exception e){
@@ -92,7 +92,7 @@ void mousePressed()
               try{
               encryptor td = new encryptor();
               td.getkey(password);
-              td.decrypt(td.Get_for_decrypt(td.before_decrypt(fileaddr)),fileaddr2+fileaddr3+"_"+"decrypt.txt");
+              td.decrypt(fileaddr,fileaddr2+fileaddr3+"_"+"decrypt.txt");
               showpass = "解密成功";
               }
               catch (Exception e){
