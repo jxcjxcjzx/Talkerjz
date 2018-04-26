@@ -559,9 +559,78 @@ class encryptor
 
       }
 
-      public void decrypt(String file, String dest) throws Exception
+      public void for_decrypt()
       {
-         
+        
+      }
+
+      public void decrypt(ArrayList<Integer> in_put, String destFile) throws Exception
+      {
+            BufferedWriter   out=new   BufferedWriter(  new   FileWriter(new File(destFile) ,true)); 
+            byte[] b_for_one = new byte[1];   
+            byte[] b_for_two = new byte[2];               
+            String ming = "";
+            for(int i=0;i<in_put.size()-1;i++){
+                if(in_put.get(i)>0){
+                  b_for_one[0] = in_put.get(i).byteValue();
+                  ming = new String(b_for_one,"gbk"); 
+                  out.write(ming); 
+                }
+                if(in_put.get(i)<0){
+                  b_for_two[0] = in_put.get(i).byteValue();
+                  b_for_two[1] = in_put.get(i+1).byteValue();
+                  ming = new String(b_for_two,"gbk"); 
+                  out.write(ming); 
+                  i++;
+                }
+
+            }            
+            out.close();            
+      }
+      
+      
+      
+      ArrayList<Integer> Get_for_decrypt(String file)
+      {
+            String strUrl = "file:///"+file;
+            String desString = "";
+            ArrayList<Integer> forreturn = new ArrayList<Integer>();
+            String temp = "";
+            try{
+                URL url = new URL(strUrl);        
+                String str = "";            
+                InputStreamReader isr = new InputStreamReader(url.openStream());
+                BufferedReader br = new BufferedReader(isr); 
+                StringBuilder built = new StringBuilder();
+                while ((str = br.readLine() )!= null) {   
+                  built.append(str);
+                }    
+                desString = built.toString();
+                isr.close();
+                br.close();
+            }    
+            catch (IOException e){            
+              // error out here 
+            } 
+            int count = desString.length()/8;
+            for(int i=0;i<count;i++){
+               if(desString.substring(i*8,(i+1)*8).charAt(0)=='1'){
+                 temp = "";
+                 for(int j=0;j<8;j++){
+                     if(desString.substring(i*8,(i+1)*8).charAt(j)=='1'){
+                       temp += "0";
+                     }
+                     if(desString.substring(i*8,(i+1)*8).charAt(j)=='0'){
+                       temp += "1";
+                     }                                      
+                 }
+                 forreturn.add(Integer.parseInt(temp, 2)*(-1)-1);
+               }
+               else{
+                 forreturn.add(Integer.parseInt(desString.substring(i*8,(i+1)*8), 2));
+               }
+            }
+            return forreturn;      
       }
       
       ArrayList<Integer> Get_Input_Bytes(String file)

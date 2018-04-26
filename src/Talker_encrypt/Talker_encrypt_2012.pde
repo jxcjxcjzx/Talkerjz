@@ -92,7 +92,7 @@ void mousePressed()
               try{
               encryptor td = new encryptor();
               td.getkey(password);
-              td.decrypt(fileaddr,fileaddr2+fileaddr3+"_"+"decrypt.txt");
+              td.decrypt(td.Get_for_decrypt(fileaddr),fileaddr2+fileaddr3+"_"+"decrypt.txt");
               showpass = "解密成功";
               }
               catch (Exception e){
