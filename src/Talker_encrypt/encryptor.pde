@@ -258,8 +258,7 @@ class encryptor
                 encrypt_key[j] = (tmp[w] >> k) & 1;
             }
       } 
-  
-  
+
     return forreturn;
   }
 
@@ -532,57 +531,119 @@ class encryptor
          return hs;
       }
 
-      public void encrypt(String destFile) throws Exception 
+      public void encrypt(ArrayList<Integer> input,String destFile) throws Exception 
       {
+            BufferedWriter   out=new   BufferedWriter(  new   FileWriter(new File(destFile) ,true));       
             int []data_loadin = new int[64];
-            int first_level = 0;  // 数组标记变量
-            int second_level = 0;
             int count = 0;
             String xieru = "";// 用于写入
-            int r = 0;  // 用于标识读取的字符的数量的变量， 为-1的时候表示读到了文件的尾部
-            byte[] bytes = new byte[8];
-            byte[] loadout = new byte[64];
-            while((r = input.read(bytes,0,8))!=-1){
-                // testing 
-                print(r);
-                    // 这个时候进行加密
-                    // 将byte 变换到需要的int类型
-                    
-                   for(first_level = 0;first_level<8;first_level++){ 
-                    for(second_level=0;second_level<8;second_level++){
-                      data_loadin[first_level*8+second_level] = bytes[first_level]>>(7-second_level)&1;
+            int loopcount = 0;
+            
+            loopcount = input.size()/64;             
+                               
+             for(int i=0;i<loopcount-1;i++){
+                    for(int j=0;j<64;j++)
+                    {
+                       data_loadin[j] = input.get(j+i*64);
                     }
-                   }
-
                     engine_one(data_loadin,encrypt_key);
                     // 每一小次加密后写入
-                    
                     for(count=0;count<64;count++)
                     {
                       xieru += String.valueOf(final_check[count]);
-                    }
+                    }                                         
                     out.write(xieru);   
                     xieru = "";
-                    
-            }          
+             }
             out.close();
-            input.close();
+
       }
 
       public void decrypt(String file, String dest) throws Exception
       {
-      
+         
       }
       
       ArrayList<Integer> Get_Input_Bytes(String file)
       {
         ArrayList<Integer> forreturn = new ArrayList<Integer>();
-            BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
-            BufferedWriter   out=new   BufferedWriter(  new   FileWriter(new File(destFile) ,true));        
+        ArrayList<String> temp = new ArrayList<String>();
+        String strUrl = "file:///"+file;
+        String desString = "";
+        try{
+            URL url = new URL(strUrl);        
+            String str = "";            
+            InputStreamReader isr = new InputStreamReader(url.openStream(),"gbk");
+            BufferedReader br = new BufferedReader(isr); 
+            StringBuilder built = new StringBuilder();
+            while ((str = br.readLine() )!= null) {   
+              built.append(str);
+            }
+            built.append("您好，欢迎阁下使用本软件，本软件是在talkerjz软件中心中免费发布，由Mr jxc开发的，希望能给您带来帮助！");
+            desString = built.toString();
+            byte[] store = desString.getBytes("gbk");  
+            for(int i=0;i<store.length;i++){
+              for(int j=0;j<8;j++){
+                temp.add(String.valueOf(this.Judge_Byte(Integer.toBinaryString(store[i])).charAt(j)));
+              }
+            }         
+            isr.close();
+            br.close();
+        }
+        catch (IOException e){            
+          // error out here 
+        } 
+        // here we can add some back handling 
+        forreturn = this.Str2Inte(temp);
         return forreturn;
       }
       
+      ArrayList<Integer> Str2Inte(ArrayList<String> forexch)
+      {
+         ArrayList<Integer> forreturn = new ArrayList<Integer>();
+         for(int i=0;i<forexch.size();i++)
+         {
+           forreturn.add(Integer.parseInt(String.valueOf(forexch.get(i))));
+         }
+         return forreturn;
+      }
       
+      String Judge_Byte(String in_content)
+      {
+        StringBuilder returnit = new StringBuilder();
+        int count = in_content.length();
+        String[] forjudge = new String[count];
+        String[] forreturn = new String[8];
+        for(int i=0;i<count;i++){
+          forjudge[i] = String.valueOf(in_content.charAt(i));
+        }
+        if(6==count){
+           forreturn[0] = "0";
+           forreturn[1] = "0";
+           for(int i=0;i<6;i++)
+           {
+              forreturn[i+2] = forjudge[i];
+           }
+        }
+        if(7==count){
+           forreturn[0] = "0";
+           for(int i=0;i<7;i++)
+           {
+              forreturn[i+1] = forjudge[i];
+           }           
+        }        
+        if(count>7){
+            forreturn[0] = "1";
+              for(int i=0;i<7;i++)
+              {
+                forreturn[i+1] = forjudge[count-1-(6-i)];
+              }
+        }
+        for(int i=0;i<8;i++){
+           returnit.append(String.valueOf(forreturn[i]));
+        }
+        return returnit.toString();
+      }
 
 
 }
