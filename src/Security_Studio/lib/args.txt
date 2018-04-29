@@ -1,0 +1,3 @@
+ -Xms64m -Xmx1024m
+Security_studio
+dom4j-1.6.1.jar,xml-apis.jar,Security_studio.jar,core.jar,jogl-all.jar,gluegen-rt.jar,jogl-all-natives-windows-i586.jar,gluegen-rt-natives-windows-i586.jar
