@@ -1,0 +1,251 @@
+
+
+
+
+
+
+
+Nutch 初体验
+
+
+
+
+前几天看到卢亮的 Larbin 一种高效的搜索引擎爬虫工具 一文提到 Nutch，很是感兴趣，但一直没有时间进行测试研究。趁着假期，先测试一下看看。用搜索引擎查找了一下，发现中文技术社区对 Larbin 的关注要远远大于 Nutch 。只有一年多前何东在他的竹笋炒肉中对 Nutch 进行了一下介绍。
+ 
+
+
+Nutch vs Lucene
+ 
+Lucene 不是完整的应用程序，而是一个用于实现全文检索的软件库。
+Nutch 是一个应用程序，可以以 Lucene 为基础实现搜索引擎应用。
+ 
+Nutch vs GRUB
+ GRUB 是一个分布式搜索引擎(参考)。用户只能得到客户端工具(只有客户端是开源的)，其目的在于利用用户的资源建立集中式的搜索引擎。
+ Nutch 是开源的，可以建立自己内部网的搜索引擎，也可以针对整个网络建立搜索引擎。自由(Free)而免费(Free)。
+ 
+Nutch vs Larbin
+ “Larbin只是一个爬虫，也就是说larbin只抓取网页，至于如何parse的事情则由用户自己完成。另外，如何存储到数据库以及建立索引的事情 larbin也不提供。［引自这里］
+ Nutch 则还可以存储到数据库并建立索引。
+ 
+
+［引自这里］ 
+
+Nutch 的早期版本不支持中文搜索，而最新的版本(2004-Aug-04 发布了 0.5)已经做了很大的改进。相对先前的 0.4 版本，有 20 多项的改进，结构上也更具备扩展性。0.5 版经过测试，对中文搜索支持的也很好。
+ 
+下面是我的测试过程。
+ 
+前提条件(这里Linux 为例，如果是 Windows 参见手册)：
+ ?Java 1.4.x 。因为我的系统上安装的Oracle 10g 已经有 Java 了。设定环境变量：NUTCH_JAVA_HOME 。
+ 
+[root@fc3 ~]# export NUTCH_JAVA_HOME=/u01/app/oracle/product/10.1.0/db_1/jdk/jre
+ 
+?Tomcat 4.x 。从这里下载。 
+?足够的磁盘空间。我预留了 4G 的空间。
+ 
+首先下载最新的稳定版：
+ 
+[root@fc3 ~]# wget http://www.nutch.org/release/nutch-0.5.tar.gz
+ 
+解压缩:
+ 
+[root@fc3 ~]# tar -zxvf nutch-0.5.tar.gz
+......
+[root@fc3 ~]# mv nutch-0.5 nutch
+ 
+测试一下 nutch 命令：
+ 
+[root@fc3 nutch]# bin/nutch
+Usage: nutch COMMAND
+where COMMAND is one of:
+crawl             one-step crawler for intranets
+admin             database administration, including creation
+inject            inject new urls into the database
+generate          generate new segments to fetch
+fetchlist         print the fetchlist of a segment
+fetch             fetch a segment's pages
+dump              dump a segment's pages
+index             run the indexer on a segment's fetcher output
+merge             merge several segment indexes
+dedup             remove duplicates from a set of segment indexes
+updatedb          update database from a segment's fetcher output
+mergesegs         merge multiple segments into a single segment
+readdb            examine arbitrary fields of the database
+analyze           adjust database link-analysis scoring
+server            run a search server
+or
+CLASSNAME         run the class named CLASSNAME
+Most commands print help when invoked w/o parameters.
+[root@fc3 nutch]#
+ 
+Nutch 的爬虫有两种方式
+ ? 爬行企业内部网(Intranet crawling)。针对少数网站进行。用 crawl 命令。
+ ?爬行整个互联网。 使用低层的 inject, generate, fetch 和 updatedb 命令。具有更强的可控制性。 
+
+以本站(http://www.dbanotes.net)为例，先进行一下针对企业内部网的测试。
+ 
+在 nutch 目录中创建一个包含该网站顶级网址的文件 urls ，包含如下内容：
+ 
+
+http://www.dbanotes.net/
+
+ 
+然后编辑conf/crawl-urlfilter.txt 文件，设定过滤信息，我这里只修改了MY.DOMAIN.NAME:
+ 
+# accept hosts in MY.DOMAIN.NAME
++^http://([a-z0-9]*\.)*dbanotes.net/
+ 
+运行如下命令开始抓取分析网站内容：
+ 
+[root@fc3 nutch]# bin/nutch crawl urls -dir crawl.demo -depth 2 -threads 4 >& crawl.log
+ 
+depth 参数指爬行的深度，这里处于测试的目的，选择深度为 2 ；
+ threads 参数指定并发的进程 这是设定为 4 ；
+ 
+在该命令运行的过程中，可以从 crawl.log 中查看 nutch 的行为以及过程:
+ 
+......
+050102 200336 loading file:/u01/nutch/conf/nutch-site.xml
+050102 200336 crawl started in: crawl.demo
+050102 200336 rootUrlFile = urls
+050102 200336 threads = 4
+050102 200336 depth = 2
+050102 200336 Created webdb at crawl.demo/db
+......
+050102 200336 loading file:/u01/nutch/conf/nutch-site.xml
+050102 200336 crawl started in: crawl.demo
+050102 200336 rootUrlFile = urls
+050102 200336 threads = 4
+050102 200336 depth = 2
+050102 200336 Created webdb at crawl.demo/db
+050102 200336 Starting URL processing
+050102 200336 Using URL filter: net.nutch.net.RegexURLFilter
+......
+050102 200337 Plugins: looking in: /u01/nutch/plugins
+050102 200337 parsing: /u01/nutch/plugins/parse-html/plugin.xml
+050102 200337 parsing: /u01/nutch/plugins/parse-pdf/plugin.xml
+050102 200337 parsing: /u01/nutch/plugins/parse-ext/plugin.xml
+050102 200337 parsing: /u01/nutch/plugins/parse-msword/plugin.xml
+050102 200337 parsing: /u01/nutch/plugins/query-site/plugin.xml
+050102 200337 parsing: /u01/nutch/plugins/protocol-http/plugin.xml
+050102 200337 parsing: /u01/nutch/plugins/creativecommons/plugin.xml
+050102 200337 parsing: /u01/nutch/plugins/language-identifier/plugin.xml
+050102 200337 parsing: /u01/nutch/plugins/query-basic/plugin.xml
+050102 200337 logging at INFO
+050102 200337 fetching http://www.dbanotes.net/
+050102 200337 http.proxy.host = null
+050102 200337 http.proxy.port = 8080
+050102 200337 http.timeout = 10000
+050102 200337 http.content.limit = 65536
+050102 200337 http.agent = NutchCVS/0.05 (Nutch; http://www.nutch.org/docs/en/bot.html; n
+utch-agent@lists.sourceforge.net)
+050102 200337 fetcher.server.delay = 1000
+050102 200337 http.max.delays = 100
+050102 200338 http://www.dbanotes.net/: setting encoding to GB18030
+050102 200338 CC: found http://creativecommons.org/licenses/by-nc-sa/2.0/ in rdf of http:
+//www.dbanotes.net/
+050102 200338 CC: found text in http://www.dbanotes.net/
+050102 200338 status: 1 pages, 0 errors, 12445 bytes, 1067 ms
+050102 200338 status: 0.9372071 pages/s, 91.12142 kb/s, 12445.0 bytes/page
+050102 200339 Updating crawl.demo/db
+050102 200339 Updating for crawl.demo/segments/20050102200336
+050102 200339 Finishing update
+64,1           7%
+050102 200337 parsing: /u01/nutch/plugins/query-basic/plugin.xml
+050102 200337 logging at INFO
+050102 200337 fetching http://www.dbanotes.net/
+050102 200337 http.proxy.host = null
+050102 200337 http.proxy.port = 8080
+050102 200337 http.timeout = 10000
+050102 200337 http.content.limit = 65536
+050102 200337 http.agent = NutchCVS/0.05 (Nutch; http://www.nutch.org/docs/en/bot.html;
+nutch-agent@lists.sourceforge.net)
+050102 200337 fetcher.server.delay = 1000
+050102 200337 http.max.delays = 100
+......
+ 
+之后配置 Tomcat (我的 tomcat 安装在 /opt/Tomcat) ， 
+
+[root@fc3 nutch]# rm -rf /opt/Tomcat/webapps/ROOT*
+[root@fc3 nutch]# cp nutch*.war /opt/Tomcat/webapps/ROOT.war
+[root@fc3 webapps]# cd /opt/Tomcat/webapps/
+[root@fc3 webapps]# jar xvf ROOT.war
+[root@fc3 webapps]# ../bin/catalina.sh start
+ 
+浏览器中输入 http://localhost:8080 查看结果(远程查看需要将 localhost 换成相应的IP)：
+ 
+
+
+搜索测试：
+ 
+
+
+可以看到，Nutch 亦提供快照功能。下面进行中文搜索测试:
+ 
+
+
+注意结果中的那个“评分详解”，是个很有意思的功能(Nutch 具有一个链接分析模块)，通过这些数据可以进一步理解该算法。
+ 
+考虑到带宽的限制，暂时不对整个Web爬行的方式进行了测试了。值得一提的是，在测试的过程中，nutch 的爬行速度还是不错的(相对我的糟糕带宽)。
+ 
+Nutch 目前还不支持 PDF(开发中，不够完善) 与 图片 等对象的搜索。中文分词技术还不够好，通过“评分详解”可看出，对中文，比如“数据库管理员”，是分成单独的字进行处理的。但作为一个开源搜索引擎软件，功能是可圈可点的。毕竟，主要开发者 Doug Cutting 就是开发 Lucene 的大牛
+ 
+参考信息
+ ? Nutch Wiki – http://www.nutch.org/cgi-bin/twiki/view/Main/Nutch
+ ?何东的 试用Nutch 
+?车东的 Lucene：基于Java的全文检索引擎简介
+ 此文作者:Fenng, 位于 Web 分类 标签: Crawl, Larbin, Lucene, Nutch on 2005/01/02. 
+转载须以超链接形式标明文章原始出处和作者信息及版权声明. 
+Post navigation
+← ITPub Search Plugin for Firefox and MozillaGoogle PR 更新以及其他 →
+
+
+
+个人介绍
+
+
+Fenng
+ Evangelist
+ Architect / Blogger
+ Life@Hangzhou
+ Work@丁香园(DXY.com)
+ ex Work@支付宝(Alipay)
+ 更多... 
+
+Weblog
+ JobsDigg
+ CNOUG
+ Hutu.me
+ Articles
+ About
+ 
+搜索本站
+
+
+Search for:
+
+最近发布
+再见,Movable Type; 你好, WordPress
+2012年个人总结
+再见, IE 6
+微信公众平台: 对话即服务 对话即搜索
+从重来到精益
+
+文章分类
+Arch 
+Database 
+Geek 
+Jobs 
+MyLife 
+OpenSource 
+Review 
+Security 
+SiteLog 
+Startup 
+Tech.Memo 
+Web 
+
+Bookmarks
+ 小道消息
+ 旧版入口
+ 
+Powered by WordPress | Hosted by Linode.com | UI Designed by Fenng | 托管赞助商：豆瓣 | 本站理念：用简约的技术取得最大的收益! 
