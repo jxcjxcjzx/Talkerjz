@@ -75,7 +75,7 @@ class signal
     String judge = null;
     judge = mainmode.vector + note.vector + pass120.vector
     +ques.vector+pianoplayer.vector+cameraone.vector+lockit.vector
-    +readbooks.vector+bookmarket.vector+mapme.vector;
+    +bookmarket.vector;
     if(!forjudge.equals(judge)){
       forjudge = judge;
       sig.sys_scroll = 0;

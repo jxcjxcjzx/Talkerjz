@@ -113,6 +113,7 @@ void handle_in_draw()
         show= "";
         title = "";
         titlentered = false;
+        bottomstop = false;
       }  else{
               if(!titlentered){
                 title = show;
@@ -152,9 +153,11 @@ void handle_in_draw()
   }
   else  if(bottomstop){
   i = 0;
-  for (j=showstore.size()-15;j<showstore.size();j++) {
-    text(showstore.get(showstore.size()-15+i), width/6+sys_scroll, height/4+i*height/28);
-    i++;
+  if(showstore.size()>16){
+      for (j=showstore.size()-15;j<showstore.size();j++) {
+        text(showstore.get(showstore.size()-15+i), width/6+sys_scroll, height/4+i*height/28);
+        i++;
+      }
   }
   }
   fill(0, 0, 0);

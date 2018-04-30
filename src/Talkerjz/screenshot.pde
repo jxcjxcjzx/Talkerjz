@@ -144,8 +144,8 @@ class screenshot
      background(211,198,154);
      pianoplayer.sys_scroll = this.sys_scroll+width;
      pianoplayer.handle_in_setup(); 
-     readbooks.sys_scroll = this.sys_scroll-width;
-     readbooks.handle_in_setup();
+ //    readbooks.sys_scroll = this.sys_scroll-width;
+  //   readbooks.handle_in_setup();
     
     image(a,width/2-a.width/2+sys_scroll,height/2-a.height/2);
     if(sig.m_keypressed&&key=='\n'){

@@ -24,6 +24,9 @@ import java.io.File;
 import java.io.IOException; 
 import javax.imageio.ImageIO; 
 
+import java.awt.event.KeyEvent;
+
+
 ceshi4 xinde;
 boolean occupied = false;
 
@@ -75,8 +78,6 @@ void handle_in_draw()
   background(179,101,217);
   ques.sys_scroll = this.sys_scroll-width;
   ques.handle_in_setup();
-  mapme.sys_scroll = this.sys_scroll+width;
-  mapme.handle_in_setup();
   
   image(a,width/2-a.width/2+sys_scroll,80);
   fill(0,0,0);

@@ -32,11 +32,11 @@ playpiano pianoplayer = new playpiano();
 screenshot cameraone = new screenshot();
 lockscreen lockit = new lockscreen();
 BookCase bookmarket = new BookCase();
-happyReader readbooks = new happyReader();
+//happyReader readbooks = new happyReader();     -----temparily not use it
 Sys_timer timerhere = new Sys_timer();
 Sys_speaker sayit = new Sys_speaker();
-MAkePossible mapme = new MAkePossible();
-
+// one pic variable for special use
+PImage newyear;
 
 PImage screenprotect;
 boolean suoping = false;
@@ -58,9 +58,8 @@ boolean suoping = false;
     note.handle_in_setup();
     cameraone.handle_in_setup();
     lockit.handle_in_setup();
-    readbooks.handle_in_setup();
+//    readbooks.handle_in_setup();
     bookmarket.handle_in_setup();
-    mapme.handle_in_setup();
     // initial part of software center
     centerone.handle_in_setup();
     centertwo.handle_in_setup();
@@ -79,8 +78,11 @@ boolean suoping = false;
     timer.schedule(new MyTask(),9*1000,60*60*1000);
     sayit.init_speak();
     sayit.sayContent("hello,jxc,welcome!");   
-    sayit.sayContent("I am talker jz, and I will play role well..");
+    sayit.sayContent("I am talker jz, and I will play role well..  Well, by the way, happy Chinese new year!");
     // testing point 
+    
+    // special use in special days
+    newyear = loadImage("2013.jpg");
 
   }
   
@@ -150,14 +152,13 @@ boolean suoping = false;
      if(lockit.inpower()){
        lockit.handle_in_draw();
      }
+ /*
      if(readbooks.inpower()){
        readbooks.handle_in_draw();
      }
+  */
      if(bookmarket.inpower()){
        bookmarket.handle_in_draw();
-     }
-     if(mapme.inpower()){
-       mapme.handle_in_draw();
      }
       else{
      }
@@ -185,6 +186,9 @@ boolean suoping = false;
      image(screenprotect,0,0);
    }
    
+   
+   // special show of images
+ //  image(newyear,0,0);
 }
   
   

@@ -6,7 +6,9 @@ class paster
   {
      boolean forreturn = false;
      String forjudge = "copy";   // here you can something else
-     if(a.contains(forjudge)){
+     String forjudgetwo = "for";
+     String forjudgethree = "me";
+     if(a.contains(forjudge)&&a.contains(forjudgetwo)&&a.contains(forjudgethree)){
         forreturn = true;
      }
      else{
@@ -17,6 +19,7 @@ class paster
   
   String handle()
   {
+     String forreturn = "";
      Clipboard sysClip = Toolkit.getDefaultToolkit().getSystemClipboard();
 	  Transferable clipTf = sysClip.getContents(null);
 	  if(clipTf!=null){
@@ -31,6 +34,7 @@ class paster
 		        }   
 		    }
 		  }  
-     return this.forpaste; 
+     forreturn = this.forpaste;
+     return forreturn; 
    }
 }
