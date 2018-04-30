@@ -1,0 +1,17 @@
+The file named after 'wordnet2.txt' is what the program I write use and all should be under this specified name if is to be in use.
+
+And current file if for the tofel test
+
+and the 'gre.txt' is the new set file for future use.
+
+
+good luck, and wish you nice experience with this
+
+well, keep this in mind : the first two lines in each file , do not delete them, cause they have effect on the fluent running of the software, the first two line appear as following:
+abandon
+deliver,giveup,indulge,surrender,yield
+
+quite awkward, but it works in this way, best wishes!
+
+
+WordBrowser  2012.10.27

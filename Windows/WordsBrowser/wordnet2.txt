@@ -1,0 +1,636 @@
+abandon
+deliver,giveup,indulge,surrender,yield
+extensive..
+broad,ranging,comprehensive
+entend..
+stretch,roll out 
+entent..
+degree,level,gradation
+feild..
+domain,realm
+flicker..
+glitter,blink
+magnificent..
+majestic,grand,imposing,grandeur,giant,colossal
+ornamentation..
+decorate,adorn,debeck
+overlook..
+ignore,neglect,oversight
+overlap..
+superpose,reduplication
+encounter..
+experience,meet with
+try out..
+on trail,on probation
+upright..
+honest,fair-minded,probity
+economical..
+provident,thirfty,frugal
+acute..
+serious,grave,critical,grievous
+acquire..
+obtain,gain,achieve,win,acquisition
+acount..
+describe,represent
+spectator..
+viewer,audience
+income..
+revenue,gainings,earnings,proceeds
+inclination..
+trend,lean to,tendency,propensity
+incentive..
+stimulate,excite,irritate,provoke,upset,catalyze
+diffuse..
+disperse,scatter,spread out
+depict..
+portray,describe,represent,outline,present,portary,delineate
+devise..
+plan,design,excogitation
+sensational..
+amazing,alarming,astonishing
+shortage..
+absense,lack
+ship..
+transport,convey
+conceive..
+compose,visualize
+corral..
+have,occupy,own,hold,possess
+clip..
+snip,shear,cut,trim,scissors
+clash..
+conflict,collide
+cite..
+quote,recommend,appoint
+clear-cut..
+distinct,in focus,intelligible
+chaos..
+confusion,disorder,havoc
+champion..
+sustain,hold out,support
+chaste..
+elegant,exquisite,graceful,courtlike,ladylike
+chafe..
+abrade,fray,attrition,wear out
+celebrated..
+fame,notability,eminence,outstanding,prestigious,chaste
+cease..
+suspand,call off,halt,stop,setback,besiege,hamper,lag,thwart,thunderstorm,hinder,impediment,ratchet
+adjacent..
+abut,near,instancy,approach
+accomplishment..
+achievement,success
+accommodate..
+contain,hold,have a capacity of
+particularly..
+especially,unusual,special
+parlour..
+drawing room,saloon
+override..
+robe,subdue,uniform,conquer,bring under control
+overt..
+obvious,clear,evident,sharp,striking
+outweight..
+exceed,outstrip,pass,surpass,outnumber,transcend
+outcome..
+ending,upshot
+obstacle..
+hinder,obstruct,barrier,bar,impediment
+odd..
+weird,strange,eccentric,oddball,grotesque,eccentric
+alternative..
+replace,in turn,supersede
+alter..
+change,transform,convert
+grope..
+fumble,try to find out,foray
+grit..
+courage,nerve
+grind..
+rub,mull,polish,trouble,mill,friction
+greedy..
+rapacious,avaricious
+gratuitous..
+free,free of charge,gratis
+grant..
+award,confer,endow,enfeoff
+hygiene..
+health,sanitation
+hypothesis..
+suppose,presume,assumption,premise,posit
+humid..
+moist,damp,moisture
+hospitable..
+good,friendly
+gush..
+spout,spurt,jet,spray,sprinkle,influx
+hue..
+color
+imply..
+meaning,hint,suggest,insinuation
+induce..
+result in,lead to,generate,incur,coax
+intense..
+nervous,strain,intensity,strength
+mimic..
+imitate,copy,simulate
+hit..
+popular
+peculiar..
+unique,special,original,distinctive,promordial,primitive,primary,crude 
+perceive..
+think,consider,deem,take for,regard as
+penchant..
+hobby,habit,addiction,fad
+persevere..
+insist,stick to,persist in,adhere to
+pervasive..
+pervade,suffuse,fill the atr,veil
+preeminent..
+distinguished,excellent,remarkable,prominent,brilliant
+preliminary..
+initial,tentative
+prestige..
+reputation,popularity,renown
+principal..
+main,major,chief,prime
+pretense..
+false,illusory,inveracious,ostensible,mendacious
+pretension..
+ask for,require,demand,claim,request
+glow..
+shine,flash,sparkle,glare,beam,blaze,irradiate,dazzlingly,flamboyant,shaft
+graceful..
+elegance,politeness,amenity,concinnity,brilliance,beloved,eminence
+free-wheeling..
+at will,do as one wishes
+plument..
+descend,drop,fail,decrease,decline,downgrade
+captivating..
+charming,enchanting,bewitch,tempting
+buckskin..
+deer
+bear..
+carry with,take,wear,equip,cherish
+blackout..
+outage,interrupt
+alien..
+unfamiliar,strangeness
+agitate..
+promote,arouse,incite,instigate
+aggregation..
+gather,assemble,collect,aggrete
+affirm..
+statement,declare,state,announce
+affinity..
+intimate,frequent,familiar,osculation,affiliate
+handsomely..
+considerable,impressive,sizable
+haphazardly..
+accidental,incidental,occasional,by chance
+hanker..
+aspire,long for,yearn for,be eager for,devour*
+industrious..
+hard-working,diligent,laboriously,painstaking
+innate..
+born,inborn,inherent
+intact..
+integrity,completion,full
+lash..
+bind,tie up,ligature,truss up
+vestige..
+relic,ruin,traces
+utilize..
+use,exploit,take advantage of
+underscore..
+emphasize,stress,underline,lay stress on
+substract..
+foundation,base,basis,groundwork
+sturdy..
+firm,strong,solid
+stipulate..
+formulate,set,rule,provision,regimentation
+staggering..
+amazing,alarming,astonishing
+species..
+type,kind,variety,class,description,gentility
+sheer..
+purity,fine
+recital..
+show,perform,put on a show
+ratify..
+approve,accept,confirm,ratification,entrench,consent
+antiquated..
+staleness,old-fashioned,obsolescence
+bleak..
+desolation,wintery,desolate
+chilly..
+cold,frigid,chill,rigour
+coherence..
+fit,agreed,unanimous,accordance
+confluence..
+collect,compile,converge,assemble,congenial
+crisscross..
+cross,intersect,overlap,crossover
+doggedly..
+tenacious,indomitable,staunch
+elaborate..
+complex,intricacy
+arduous..
+trail,hard,arid*
+arid..
+drought,dry
+authentic..
+real,true
+choppy..
+wave*,churn,spray,sprawl
+cognitive..
+cognize,acknowledge,perceive
+comical..
+funny,amusing
+commemorate..
+mark,souvenir,keepsake
+complement..
+supply,add,replenish
+convict..
+be sure of,certitude,assurance
+coordinated..
+harmonize,cohere with,concert,bring into line
+deplete..
+use up,exhaust,drain
+dilute..
+thinning,deliquate,attenuation
+disciple..
+apprentice,trainee
+disintergrate..
+split,divide,fission,cleavage,abruption
+dismal..
+melancholy,dejected,heavyhearted
+dispense..
+distribute,allot,assign,allocation
+embody..
+reflect,incarnate
+intail..
+include,consist of,comprise,contain,cover,encompass
+erect..
+build,establish,found,install,set up
+allegory..
+fable,parable,allusive
+aloof..
+loneliness,solitude,solitary
+amenity..
+happy,delightful
+ancillary..
+addition,subjoin,append,annex
+deity..
+god
+demolition..
+destory,damage,ruin,ravage,erode,etch
+depreciation..
+drop,fall,tumble
+dime..
+point,corner,nook,angle
+devour..
+aspire*,long for*
+dispute..
+argue,debate,controversy
+disperse..
+scatter,decentralize,segregation
+enchantment..
+joy
+evalute..
+assess,appraise,setimate
+feat..
+skill
+fervor..
+zeal,enthusiastim,warmth,ardour
+rational..
+reasonable
+knuchle..
+joint,links,juncture,articulation
+lavish..
+waste,squander,dissipate,profusion,extravagant
+inquisitive..
+vagary,intriguing
+gallant..
+intrepid,courageous,valiant
+intimate..
+close
+idyllic..
+beautiful,excellent
+haunt..
+place often go to
+glean..
+collect,gather,coalescence,coalition,conscription*
+gibe..
+make fun of,laugh at, ridicule,deride,mock
+intervene..
+insert,plug in,interpose,break in
+melange..
+mix,blend,mingle,compound
+melody..
+cantus,canto,thythm,metre
+maneuver..
+strategy,tactics,tactful
+merit..
+advantage,virtue
+metabolic..
+supersession,digest
+ministry..
+transition,interim
+monochrome..
+single color,monotonous,dull,humddrum,tedium
+mitigate..
+relax,assuage,ease,alleviate,ameliorate 
+converse..
+chat,talk with
+dubious..
+distrust,doubt,suspect,suspicious
+duct..
+pipe,tube,manage,govern
+envision..
+forecast,calculate,prognosis,divine,herald
+esoteric..
+secret,confidential
+exert..
+influence,affect,impact,impress
+exhilarating..
+inspired,endear
+equilibrium..
+balance
+enzyme..
+ferment
+encroachment..
+seize
+ephemeral..
+moment,instant,minute,wink
+expense..
+cost,spend,expenditure
+extract..
+refine,abstract
+extremity..
+end
+facade..
+front,frontage,positive
+facsimile..
+copy,impersonate
+fanatical..
+extasis,ecstasis,obsessed
+farce..
+comedy
+fatigue..
+tired,weary,strain
+emanate..
+send out,diffuse,emit,distribute
+eloquent..
+vivid,lively,frisky
+flannel..
+woolen
+flair..
+discern,have a insight into,see clearly
+flock..
+group,crowd,herd,flora*,horde,swarm
+elixir..
+cream,essence,slite
+eerily..
+mystical
+fluctuate..
+wave,rise and fall,undulate,surge,turbulent
+foliage..
+leaf,foliage,lobe
+frivolous..
+given and philandering
+gospel..
+good news,glad tidings
+hive..
+bee*,honeybee*,nectar*
+homely..
+common,ordinary,general,plain,average,spare
+homogenerous..
+similar
+nascent..
+new,fresh,novel
+mural..
+fresco,wall painting
+mutation..
+change,variation,modification,vary
+meteorite..
+shooting star
+offspring..
+descendant,progeny,posterity
+optimum..
+the best
+ordinance..
+decree,order,statutes,laws,imperative
+ore..
+mineral,stone*
+palatable..
+delicious,delicacy,tasty,dainty
+patronage..
+subsidize,aid financially
+penal..
+punishment,penalize
+peripheral..
+minor,subordination,periphery*
+perish..
+destory
+permanent..
+perpetual
+plainspoken..
+upright,honest,fair-minded
+prototype..
+archetype,model
+remedy..
+repair,remediation
+resume..
+continue,go on,keep on, proceed
+retain..
+keep,maintain,hold,retain,preserve
+span..
+bridge,step over,crossing,astride,spanking
+sturdiness..
+strong,solid,firm
+subsequent..
+follow,soon afterwards
+advent..
+appear,emerge,arise,grow
+ambiguous..
+dim,vague,obscure,indistinct,fuzzy,ambivalent,wispy
+ambidextrous ..
+dexterous,nimble,skillful,ingenious
+amenable..
+obligation,duty,volunteer
+anatomy..
+dissection
+antagonist..
+confront,withstand,cope,rival
+apothecary..
+drug*,agentia*,stuff
+arsenal..
+military*
+arthritis..
+joint*,knuckle*
+autonomy..
+act on one's own
+avant-garde..
+van,forward
+barren..
+poor,infertile
+bonanza..
+well-off,prosperous,boom
+bore..
+inner diameter
+brawl..
+quarrel,squabble,wrangle
+bulge..
+project,prominent,embossing
+bulldoze..
+shove*,hustle*,push*
+burgeon..
+sprout,germinate
+camouflage..
+fake,forged,illegal,puppet,false
+carnivorous..
+meat-eating
+choreographer..
+dance*
+coaming..
+baffledam-board,flap
+concave..
+sunken,dent,sink
+conceal..
+hide,hold back
+concede..
+admit,recognize,confide*,sanction
+connoisseur..
+adept,professionals,experienced
+consortium..
+association,institute,society
+counterpart..
+corresponding,homologous,parallelism
+curio..
+antique,old fogey
+idiosyncracy ..
+unique,special,distinctive
+imminent..
+gain on,impend over,approach,draw near
+liberate..
+release,free,acquittal
+lithosphere..
+rock*
+lopsided..
+inclined,oblique,slanting,titled,bias
+magenta..
+pinkish red
+magnify..
+amplification,enlargement,blow up
+prairie..
+llano,savanna,big grass land*
+precipitate..
+sudden,abrupt,unexcepted
+precipitation..
+rainfall
+preponderance..
+superiority,goodness
+prerequisite..
+condition,term,requirement
+prolong..
+extend,lengthen
+prudent..
+thrity,frugal,economical
+pulp..
+paper*,bumf*
+purveyor..
+undertake
+qualitative..
+determine the nature
+quench..
+subside,calm down,quiet down
+replenish..
+full,fill
+resonance..
+echo,bounce back
+retreat..
+draw back,fall back,recession
+rhetoric..
+figure of the speech
+ritual..
+ceremony,rite
+roam..
+ramble,promenade,meander,stroll
+roar..
+thunder,rolling,growl
+rudiment..
+principle,tenet,theory,axiom
+score..
+composition,music
+scrupulously ..
+rigorous,strict,stringent
+sear..
+scorching hot,glow,broil
+seepage..
+permeate,infiltrate,seep into
+sewage..
+dirt,corrupt,defile,smear,silt,sully,taint
+silhouette..
+outline,line,rough sketch
+simultaneously..
+meanwhile,contemporary
+slothful..
+lazy,idle,sluggishly 
+smite..
+move,touch,arouse one's feelings
+solitude..
+loneliness,all alone
+strap..
+bundle,tie,bind,bunch,strenuous
+synthetics..
+aritificial,labour
+tale..
+story,plot
+tantalizing..
+attractive,fascinating,absorbing,alluring,intriguing
+tardy..
+slow,late,delayed,obtuse,torpor*
+tectonic..
+structure,constitution,formation
+tentacle..
+feeler,antenna
+tepee..
+tent,lodge,tentage,praetotium
+terrain..
+landform,geography
+tessellation..
+inlay,set,fill in,insert
+thaw..
+melt
+tonal..
+tone,pitch,accent
+tranquil..
+serenity
+trestle..
+elevated,overhead
+ubiquity..
+general,widespread,rifeness
+unanimous..
+accordance,agreed
+underlying..
+foundation,basis,groundwork
+diminished..
+whittle,impair,weaken,cripple
+unfailing..
+throughout*,all long*
+bulky..
+hugeness,enormous,tremendous,unwieldy
+upgrade..
+improve,perfect,better,mend
+valiant..
+courageous,gallant,brave,valor,venturesome
+variance..
+difference,discrepancy,diversity
+vent..
+exit,way out,export,speak,utter
+vibrant..
+vigorous,energy,whim*
+virtuosity..
+exquisite,consummate
