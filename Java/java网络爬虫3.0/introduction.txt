@@ -1,0 +1,20 @@
+  This document is tended to give a brief introduction to the software or we can call it a gathering of codes to try to grap something we need on the Interne.
+  Basically, it can be divided into two blocks which you can see as listed outside.
+And intergrated environment we used is Eclipse, which is designed for java program development.
+  You are recommended to make a project of each of the codes seperatedly. And then you only have one more step to go.
+  The first part is designed to write to a .txt form document, which can be known as the masses of website addresses you are not likely to type in one by one ,which also tells you that these website addresses should or are considered to be regular to each other. Some examples here I can list just like the book websites which you would like to copy , and compile them to a whole book so you can enjoy them off the Internet, in addition,here we made a parser and crawler for double, (whihc in Chinese we can call it “豆瓣”),this is a website among millions similar which acts as a community and place where people can share and discuss and gather, so we would like to know how many sites here in double, so we found that these sites have some similarities, one site tend to be like following:
+
+http://site.douban.com/121345/
+
+and we take notice of the next to be :
+
+http://site.douban.com/121346/
+
+so we have a solution here.
+
+  I think you already found what's interesting here now.
+  For more peculiar information and details ,you just need to take a look at the codes I provided.
+  So I am to think we are endowed with the ability to dig into other websites to find something we need but also time-consuming if we do it without such a powerful tool.
+  And wish you have a nice experience with it, whank you for using!
+
+卷心菜 2012.5.10 中国南京 Nanjing University  

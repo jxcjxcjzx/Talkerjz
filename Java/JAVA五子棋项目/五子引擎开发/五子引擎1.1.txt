@@ -1,0 +1,275 @@
+import java.awt.*; 
+import java.awt.event.*; 
+import java.applet.Applet; 
+import java.awt.Color; 
+
+public class wuzi extends Applet implements MouseListener, 
+MouseMotionListener{ 
+int color = 0;// 旗子的颜色标识 0:白子 1:黑子 
+
+
+int bodyArray[][] = new int[25][25]; // 设置棋盘棋子状态 0 无子 -1 白子 1 黑子 
+
+public void init() { 
+setLayout(null); 
+addMouseListener(this); 
+gameInit(); 
+this.resize(new Dimension(500,490)); 
+} 
+
+public void mousePressed(MouseEvent e) { 
+} 
+
+public void mouseClicked(MouseEvent e) { 
+int x1, y1; 
+x1 = e.getX(); 
+y1 = e.getY(); 
+if (e.getX() < 20 || e.getX() > 480 || e.getY() < 20 || e.getY() > 480) { 
+return; 
+} 
+
+if (x1 % 20 > 10) { 
+x1 += 20; 
+} 
+
+if (y1 % 20 > 10) { 
+y1 += 20; 
+} 
+
+x1 = x1 / 20 * 20; 
+y1 = y1 / 20 * 20; 
+setDown(x1, y1); 
+danao9(x1,y1);
+
+
+} 
+
+public void mouseEntered(MouseEvent e) { 
+} 
+
+public void mouseExited(MouseEvent e) { 
+} 
+
+public void mouseReleased(MouseEvent e) { 
+} 
+
+public void mouseDragged(MouseEvent e) { 
+} 
+
+public void mouseMoved(MouseEvent e) { 
+} 
+
+public void danao9(int x,int y)
+{
+	//这里就是这个JAVA人机对战程序的主要部分，在这里，你可以自由的实现你所需要的人工智能的代码，这里存在
+	//所有的可能！而我们给它起的名字是danao9，也是希望这个程序的智能部分能够做到给人留下深刻的印象！
+	//相信在这个五子棋的平台的帮助下，你可以很好的完成人工智能的编程！祝你好运！
+	//但是你也有一些注意事项，主要就是你需要注意给定的数组的大小，因为数组的大小是给定的，所以你必须注意到这样的一点
+	//除了对于数组的大小的注意，你还需要使用我提供的标准的记录数组，在这个数组中，有你所有需要的期盼实时信息
+	//利用这些信息，你可以很好的完成相应的功能，五子棋是一门艺术，希望你能让它更富有魅力！
+	int luozix=0;
+	int luoziy=0;
+	int jishu1=0;
+	int jishu2=0;
+	int p=0;
+	int q=0;
+	int counter1=0;
+	int counter2=0;
+	int xunhuanx=0;
+	int xunhuany=0;
+	int xunhuan1=0;
+	int xunhuan2=0;
+	int chuanrux=0;
+	int chuanruy=0;
+	int locationx=0;
+	int locationy=0;
+	int weizix=0;
+	int weiziy=0;
+	chuanrux=x/20;
+	chuanruy=y/20;
+	int jifen[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	int dingweix[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	int dingweiy[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	int dingwei[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	for(xunhuanx=chuanrux-2;xunhuanx<chuanrux+3;xunhuanx++)
+	   for(xunhuany=chuanruy-2;xunhuany<chuanruy+3;xunhuany++)
+	   {
+		   if(xunhuanx==chuanrux&&xunhuany==chuanruy)
+		   {
+			   dingwei[jishu1]=1000;
+		   }
+		   else
+		   {
+			   if(xunhuanx<0||xunhuanx>24||xunhuany<0||xunhuany>24)
+			   {
+				   dingwei[jishu1]=1000;
+			   }
+			   else
+			   {
+				   dingweix[jishu1]=xunhuanx;
+				   dingweiy[jishu1]=xunhuany;
+			   }
+			   
+		   }
+		   jishu1++;
+	   }
+	for(jishu2=0;jishu2<25;jishu2++)
+	{
+		weizix=dingweix[jishu2];
+		weiziy=dingweiy[jishu2];
+		if(dingwei[jishu2]==1000)
+		{
+			continue;
+		}
+		else
+		{ 
+			if(bodyArray[weizix][weiziy]==1||bodyArray[weizix][weiziy]==-1)
+	    	  {
+	    		  jifen[jishu2]+=-100;
+	    	  }
+			else
+			{
+				
+				
+			}
+		}
+	}
+	
+	
+	for(jishu2=0;jishu2<25;jishu2++)
+	{
+		weizix=dingweix[jishu2];
+		weiziy=dingweiy[jishu2];
+		if(dingwei[jishu2]==1000)
+		{
+			continue;
+		}
+		else
+		{ 
+			for(counter1=0;counter1<25;counter1++)
+			{
+				locationx=dingweix[counter1];
+				locationy=dingweiy[counter1];
+				if(locationx==weizix&&locationy==weiziy)
+				{
+					continue;
+				}
+				else
+				{
+					if(locationx==weizix||locationy==weiziy)
+					{
+						if(bodyArray[locationx][locationy]==1)
+							jifen[jishu2]+=2;
+						else
+						{
+							if(bodyArray[locationx][locationy]==-1)
+							{
+								jifen[jishu2]+=1;
+							}
+							else
+							{
+								
+							}
+						}	
+					}
+					else
+					{
+						if((locationx-weizix)==(locationy-weiziy))
+						{
+							if(bodyArray[locationx][locationy]==1)
+								jifen[jishu2]+=2;
+							else
+							{
+								if(bodyArray[locationx][locationy]==-1)
+								{
+									jifen[jishu2]+=1;
+								}
+								else
+								{
+									
+								}
+							}	
+						}
+						else
+						{
+							
+						}
+					}
+				}
+			}
+		}
+	}
+	int zuida=0;
+	for(counter2=0;counter2<25;counter2++)
+	{
+		if(jifen[counter2]>zuida)
+		{
+			zuida=jifen[counter2];
+		}
+		else
+		{
+			continue;
+		}
+	}
+	
+	for(counter2=0;counter2<25;counter2++)
+	{
+		if(jifen[counter2]==zuida)
+		{
+			luozix=dingweix[counter2]*20;
+			luoziy=dingweiy[counter2]*20;
+		}
+		else
+		{
+			
+		}
+	}	
+	
+  setDown2(luozix,luoziy);
+}
+public void paint(Graphics g) { 
+g.setColor(Color.lightGray); 
+g.fill3DRect(10, 10, 480, 480, true); 
+g.setColor(Color.black); 
+for (int i = 1; i < 25; i++) { 
+g.drawLine(20, 20 * i, 480, 20 * i); 
+g.drawLine(20 * i, 20, 20 * i, 480); 
+} 
+} 
+
+public void setDown(int x, int y) // 落子 ,黑棋
+{ 
+if (bodyArray[x / 20][y / 20] != 0) { 
+return; 
+} 
+Graphics g = getGraphics(); 
+g.setColor(Color.black); 
+g.fillOval(x - 10, y - 10, 20, 20); 
+
+bodyArray[x / 20][y / 20] =1; 
+} 
+
+public void setDown2(int x2, int y2) // 落子 ，白棋
+{ 
+if (bodyArray[x2 / 20][y2 / 20] != 0) { 
+return; 
+} 
+Graphics g = getGraphics(); 
+g.setColor(Color.white); 
+g.fillOval(x2 - 10, y2 - 10, 20, 20); 
+
+bodyArray[x2 / 20][y2 / 20] =-1; 
+} 
+public void gameInit() // 游戏开始初始化 
+{ 
+
+
+for (int i = 0; i < 25; i++) { 
+for (int j = 0; j < 25; j++) { 
+bodyArray[i][j] = 0; 
+} 
+} 
+
+} 
+
+}

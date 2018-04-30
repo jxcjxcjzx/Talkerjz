@@ -1,0 +1,226 @@
+import java.awt.*; 
+import java.awt.event.*; 
+import java.applet.Applet; 
+import java.awt.Color; 
+
+public class wuzi extends Applet implements MouseListener, 
+MouseMotionListener{ 
+int color = 0;// 旗子的颜色标识 0:白子 1:黑子 
+
+
+int bodyArray[][] = new int[25][25]; // 设置棋盘棋子状态 0 无子 -1 白子 1 黑子 
+
+public void init() { 
+setLayout(null); 
+addMouseListener(this); 
+gameInit(); 
+this.resize(new Dimension(500,490)); 
+} 
+
+public void mousePressed(MouseEvent e) { 
+} 
+
+public void mouseClicked(MouseEvent e) { 
+int x1, y1; 
+x1 = e.getX(); 
+y1 = e.getY(); 
+if (e.getX() < 20 || e.getX() > 480 || e.getY() < 20 || e.getY() > 480) { 
+return; 
+} 
+
+if (x1 % 20 > 10) { 
+x1 += 20; 
+} 
+
+if (y1 % 20 > 10) { 
+y1 += 20; 
+} 
+
+x1 = x1 / 20 * 20; 
+y1 = y1 / 20 * 20; 
+setDown(x1, y1); 
+danao9(x1,y1);
+
+
+} 
+
+public void mouseEntered(MouseEvent e) { 
+} 
+
+public void mouseExited(MouseEvent e) { 
+} 
+
+public void mouseReleased(MouseEvent e) { 
+} 
+
+public void mouseDragged(MouseEvent e) { 
+} 
+
+public void mouseMoved(MouseEvent e) { 
+} 
+
+public void danao9(int x,int y)
+{
+	//这里就是这个JAVA人机对战程序的主要部分，在这里，你可以自由的实现你所需要的人工智能的代码，这里存在
+	//所有的可能！而我们给它起的名字是danao9，也是希望这个程序的智能部分能够做到给人留下深刻的印象！
+	//相信在这个五子棋的平台的帮助下，你可以很好的完成人工智能的编程！祝你好运！
+	//但是你也有一些注意事项，主要就是你需要注意给定的数组的大小，因为数组的大小是给定的，所以你必须注意到这样的一点
+	//除了对于数组的大小的注意，你还需要使用我提供的标准的记录数组，在这个数组中，有你所有需要的期盼实时信息
+	//利用这些信息，你可以很好的完成相应的功能，五子棋是一门艺术，希望你能让它更富有魅力！
+	int luozix=20;
+	int luoziy=20;
+	int weizix=0;
+	int weiziy=0;
+	int jishu=0;
+	int jishu1;
+	int jishu2;
+	int dingweixunhuanx;
+	int dingweixunhuany;
+	int pinfeng[]= {0,0,0,0,0,0,0,0};
+	int jishux=0;
+	int jishuy=0;
+	int chuanrux;
+	int chuanruy;
+	int dingweix[]={0,0,0,0,0,0,0,0};
+	int dingweiy[]={0,0,0,0,0,0,0,0};
+	chuanrux=x;
+	chuanruy=y;
+	int shuzux=chuanrux/20;
+	int shuzuy=chuanruy/20;
+    for(dingweixunhuanx=shuzux-1;dingweixunhuanx<shuzux+2;dingweixunhuanx++)
+       for(dingweixunhuany=shuzuy-1;dingweixunhuany<shuzuy+2;dingweixunhuany++)
+       {
+    	   jishux=dingweixunhuanx;
+  	       jishuy=dingweixunhuany;
+    	   if(dingweixunhuanx==shuzux&&dingweixunhuany==shuzuy)
+    	   {
+    		   dingweix[jishu]=1000;
+    		   dingweiy[jishu]=1000;
+    		   continue;
+    	   }
+    	   else
+    	   {
+    	     
+    	     if(jishux<0||jishux>24||jishuy<0||jishuy>24)
+    	     {
+    	    	 dingweix[jishu]=1000;
+    	    	 dingweiy[jishu]=1000;
+    	     }
+    	     else
+    	     {
+    	    	 if(bodyArray[jishux][jishuy]==0)
+    	    	 {
+    	    	   dingweix[jishu]=jishux;
+    	    	   dingweiy[jishu]=jishuy;
+    	    	 }
+    	    	 else
+    	    	 {
+    	    		 dingweix[jishu]=1000;
+    	    		 dingweiy[jishu]=1000;
+    	    		 jishu++;
+    	    		continue;    	    		 
+    	    	 }
+    	     }
+    	   }
+    	   jishu++;
+       }
+    jishux=0;
+    jishuy=0;
+    for(jishu=0;jishu<8;jishu++)
+    {
+    	weizix=0;
+    	weiziy=0;
+    	if(dingweix[jishu]==1000||dingweiy[jishu]==1000)
+    	{
+    		pinfeng[jishu]=10000;
+    		continue;
+    	}
+    	else
+    	{
+    		weizix=dingweix[jishu];
+    		weiziy=dingweiy[jishu];    		    		
+    	}
+    	for(jishu1=weizix-1;jishu1<weizix+2;jishu1++)
+    		for(jishu2=weiziy-1;jishu2<weiziy+2;jishu2++)
+    		{
+    			if(jishu1<0||jishu1>24||jishu2<0||jishu2>24)
+    			{
+    				pinfeng[jishu]=10000;
+    				continue;
+    			}
+    			else
+    			{
+    	           pinfeng[jishu]+=bodyArray[jishu1][jishu2];
+    			}
+    		}
+    }
+    jishu=0;
+    int zuixiao=100;
+    for(jishu=0;jishu<8;jishu++)
+    {
+    	if(pinfeng[jishu]<zuixiao)
+    	{
+    		zuixiao=pinfeng[jishu];
+    	}
+    }
+    for(jishu=0;jishu<8;jishu++)
+    {
+    	if(pinfeng[jishu]==zuixiao)
+    	{
+    		luozix=dingweix[jishu]*20;
+    		luoziy=dingweiy[jishu]*20;
+    		break;
+    	}
+    	else
+    	{
+    		continue;
+    	}
+    }
+  setDown2(luozix,luoziy);
+}
+public void paint(Graphics g) { 
+g.setColor(Color.lightGray); 
+g.fill3DRect(10, 10, 480, 480, true); 
+g.setColor(Color.black); 
+for (int i = 1; i < 25; i++) { 
+g.drawLine(20, 20 * i, 480, 20 * i); 
+g.drawLine(20 * i, 20, 20 * i, 480); 
+} 
+} 
+
+public void setDown(int x, int y) // 落子 
+{ 
+if (bodyArray[x / 20][y / 20] != 0) { 
+return; 
+} 
+Graphics g = getGraphics(); 
+g.setColor(Color.black); 
+g.fillOval(x - 10, y - 10, 20, 20); 
+
+bodyArray[x / 20][y / 20] =1; 
+} 
+
+public void setDown2(int x2, int y2) // 落子 
+{ 
+if (bodyArray[x2 / 20][y2 / 20] != 0) { 
+return; 
+} 
+Graphics g = getGraphics(); 
+g.setColor(Color.white); 
+g.fillOval(x2 - 10, y2 - 10, 20, 20); 
+
+bodyArray[x2 / 20][y2 / 20] =-1; 
+} 
+public void gameInit() // 游戏开始初始化 
+{ 
+
+
+for (int i = 0; i < 25; i++) { 
+for (int j = 0; j < 25; j++) { 
+bodyArray[i][j] = 0; 
+} 
+} 
+
+} 
+
+}

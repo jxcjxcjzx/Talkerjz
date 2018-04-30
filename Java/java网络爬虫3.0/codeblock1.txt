@@ -1,0 +1,39 @@
+import java.io.*;
+
+public class ceshi2 { 
+
+	/** 
+	 * @param args 
+	 */ 
+	public static void main(String[] args){ 
+		// TODO Auto-generated method stub 
+
+		 try { 
+			    int jishu =121000;
+			    int i=0;
+			    File   file=new   File( "D:/Program Files/Smith/zhengze/ku.txt"); 
+	            BufferedWriter   out=new   BufferedWriter( 
+	                 new   FileWriter(file,true)); 
+
+			    String content = "http://site.douban.com/"+jishu+"/"; 
+			    for(i=0;i<1000;i++)
+			    {
+			    content = "http://site.douban.com/"+jishu+"/"; 
+			    out.write(content);
+			    out.newLine();
+			    jishu++;
+			    
+			    }
+			    out.close(); 
+	            out=null; 
+	            file=null; 
+                System.out.println("success write in!");
+			} catch (IOException e) { 
+				e.printStackTrace(); 
+			} 
+	                             
+			 
+		 
+	
+	}
+}
